@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- 	<p:dialog  widgetVar="dlg"
+		modal="true" dynamic="true" hideEffect="explode"
+		class="modal #{sharedModal.cssClasses}"> -->
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">x</button>
+				<h4 class="modal-title">#{sharedModal.title}</h4>
+			</div>
+			<div class="modal-body">
+				<ui:include src="#{sharedModal.contentUrl}" />
+			</div>
+			<div class="modal-footer">
+				<p:commandButton value="confirm" class="btn btn-default pull-left" 
+					 oncomplete="PF('dlg').hide();" />
+				
+				<p:commandButton value="cancel" class="btn btn-default pull-right" 
+				 onclick="PF('dlg').hide()" />
+			</div>
+		</div>
+	<!-- </p:dialog> -->
+
+
+</ui:composition>

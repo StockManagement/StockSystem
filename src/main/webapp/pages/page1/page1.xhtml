@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template/master.xhtml">
+	<!-- page title -->
+	<ui:define name="title">#{msg.stock}</ui:define>
+	
+	<!-- page body -->
+	<ui:define name="content">
+		<section class="content-header">
+		<h1>
+			page 1 <small>Preview of UI elements</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> page1</a></li>
+			<li><a href="#">page</a></li>
+			<li class="active">1</li>
+		</ol>
+		</section>
+		<section class="content">
+			Hello this is page 1
+		</section>
+	</ui:define>
+</ui:composition>
+</html>

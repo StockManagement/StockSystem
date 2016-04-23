@@ -6,6 +6,19 @@
  *           Please visit http://opensource.org/licenses/MIT for more information
 !*/
 
+.navbar-custom-menu > ul.navbar-nav  {
+    transform: rotate(180deg) !important;
+    -webkit-padding-start: 0px !important;
+            
+}
+.navbar-custom-menu > .navbar-nav > li {
+    transform: rotate(-180deg) !important;
+}
+
+text-align-left{
+	text-align: right;
+}
+
 .float-left {
     float: left;
 }

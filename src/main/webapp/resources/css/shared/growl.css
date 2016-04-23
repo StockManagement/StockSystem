@@ -1,0 +1,37 @@
+.ui-growl {
+	z-index: 1030;
+    margin-top: 32px;
+}
+
+.ui-growl-item  .ui-growl-image-success{
+	/* background: red; */
+}
+
+.ui-growl-item  .ui-growl-image-error{
+	/* background: red; */
+}
+
+.ui-growl-item  .ui-growl-image-warn{
+	position:relative;
+}
+
+.ui-growl-image-warn :before {
+    content: "\25AE"; 
+    font-family: FontAwesome;
+    left:-5px;
+    position:absolute;
+    top:0;
+ }
+
+.growl-success {
+/* 	background: #00a65a !important; */
+	background: #008d4c !important;
+}
+
+.growl-error {
+	background: #d33724 !important;
+}
+
+.growl-warning {
+	background: #db8b0b !important;
+}

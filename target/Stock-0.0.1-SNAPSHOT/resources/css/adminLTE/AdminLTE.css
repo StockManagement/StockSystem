@@ -10,6 +10,19 @@
  * Core: General Layout Style
  * -------------------------
  */
+ 
+text-align-left{
+	text-align: left;
+}
+ 
+.float-left {
+    float: left;
+}
+
+.pull-left {
+	float: left;
+}
+
 html,
 body {
   min-height: 100%;
@@ -26,6 +39,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 /* Layout */
 .wrapper {
   min-height: 100%;

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/master.xhtml">
+	<!-- header page title -->
+	<ui:define name="title">#{msg.stock}</ui:define>
+	
+	<!-- page body -->
+	<ui:define name="content">
+		<!-- body page title -->
+		<section class="content-header">
+		<h1>
+			General UI <small>Preview of UI elements</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="#">UI</a></li>
+			<li class="active">General</li>
+		</ol>
+		</section>
+		
+		<section class="content">
+			<!-- use msg controller for internationalization
+				and type your text translation for english, french and arabic in src/main/resources/languages
+				(text.properties for english text)
+				(text_fr.properties for french text)
+				(text_ar.properties for arabic text)
+			 -->
+			<h:outputText value="#{msg.hello}" />
+			<br />
+	 		   Hello this is your home page <br />
+	 		   Dear development team 	<br />
+	 		   please try to keep you <b>code clean</b> <br />
+	 		   this is the url of the template used in our application: 
+	 		   <!-- note that this link is created client side  -->
+	 		   <a href=" https://almsaeedstudio.com/preview" target="_blank"> adminLTE </a> <br />
+	 		   Thank you 
+		</section>
+	</ui:define>
+</ui:composition>
+</html>

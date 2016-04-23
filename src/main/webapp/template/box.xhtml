@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<composite:interface>
+      <composite:attribute name="boxTitle" />
+   
+      <composite:attribute name="loginButtonAction" 
+	         method-signature="java.lang.String login()" />
+   </composite:interface>
+   
+   
+   
+   
+   <composite:implementation>
+   
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">#{cc.attrs.boxTitle}</h3>
+			</div>
+			<h:form>
+				<div class="box-body">
+					<div class="form-group">
+						<h:outputLabel for="txtTeethCount" value="#{msg.teethCount}" />
+						<h:inputText id="txtTeethCount" value="#{home.teethCount}"
+							class="form-control" />
+					</div>
+				</div>
+			</h:form>
+			<div class="box-footer">
+				<h:button class="btn btn-primary" value="#{msg.submit}" />
+			</div>
+		</div>
+
+	</composite:implementation>
+</html>

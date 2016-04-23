@@ -1,0 +1,25 @@
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 
+
+.hide{
+	display: none;
+}
+
+.text-align-left{
+	text-align: left;
+}
+
+.text-align-right{
+	text-align: right;
+}
+
+.ui-datatable thead th{
+	text-align: left;
+}

@@ -1,0 +1,26 @@
+.ui-dialog .ui-dialog-titlebar {
+    width: 100%;
+	background: white;
+	padding: 0;
+}
+
+.ui-dialog-title{
+	width: 100%;
+	background: white;
+}
+
+.modaDialog{
+	background: white;
+}
+
+.modal-header .close {
+    margin-top: -12px;
+}
+
+.modal-footer {
+	margin-top:35px;
+}
+
+th{
+    text-align: left;
+}

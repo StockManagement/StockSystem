@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<h:outputStylesheet library="css/shared" name="font-awesome.min.css" />
+	<h:outputStylesheet library="css/shared" name="font-JFFlatRegular.css" />
+	
+	<h:outputStylesheet library="css/template" name="header.css" />
+
+	<h:outputStylesheet rendered="#{language.locale eq 'ar'}"
+		library="css/adminLTE" name="AdminLTE-ar.css" />
+	<h:outputStylesheet rendered="#{language.locale ne 'ar'}"
+		library="css/adminLTE" name="AdminLTE.css" />
+	<h:outputStylesheet library="css/adminLTE/skins"
+		name="skin-blue.min.css" />
+	<h:outputStylesheet library="css/adminLTE/skins"
+		name="skin-blue.min.css" />
+
+	<h:outputStylesheet library="css/disc" name="disc.css" />
+	<h:outputStylesheet library="css/shared" name="shared.css" />
+	<h:outputStylesheet library="css/shared" name="shared-ar.css" rendered="#{language.locale eq 'ar'}" />
+	<ui:insert name="css" />
+</h:head>
+
+
+<h:body styleClass="skin-blue sidebar-mini">
+	<h:outputStylesheet rendered="#{language.locale ne 'ar'}"
+		library="webjars/bootstrap/3.2.0/css" name="bootstrap.min.css" />
+	<h:outputStylesheet rendered="#{language.locale eq 'ar'}"
+		library="css/shared" name="bootstrap-ar.min.css" />
+	<h:outputStylesheet library="css/shared" name="modal.css" />
+	<ui:debug hotkey="x"
+		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
+		
+<!-- <i id="customheader" class="fa fa-fw fa-car" style="display:none"></i> -->
+
+
+		<ui:insert name="content">
+		</ui:insert>
+
+
+
+	<!-- <h:outputScript library="js/jquery" name="jquery-2.1.1.min.js" /> -->
+	<h:outputScript library="webjars/bootstrap/3.2.0/js"
+		name="bootstrap.min.js" />
+	<h:outputScript library="js/adminLTE" name="app.js" />
+	<h:outputScript library="js/shared" name="modal.js" />
+	<h:outputScript library="primefaces" name="jquery/jquery.js"
+		target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
+		target="head" />
+</h:body>
+
+</html>
