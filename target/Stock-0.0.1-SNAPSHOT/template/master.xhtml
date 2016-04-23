@@ -2,7 +2,8 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
   <title><ui:insert name="title">Default title</ui:insert></title>
   <h:outputStylesheet library="css/adminLTE" name="AdminLTE.css"/>
@@ -14,6 +15,7 @@
 </h:head>
 
 <h:body styleClass="skin-blue sidebar-mini">
+	
 	<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
 	<div class="wrapper">
 		
@@ -26,7 +28,12 @@
 	
 	<div id="content" class="content-wrapper">
 	  <ui:insert name="content">
-	    
+	  	<h:form>
+	  		<h:commandLink action="#{language.change('en')}" value="English" /><br />
+	  		<h:commandLink action="#{language.change('fr')}" value="French" /><br />
+	  		<h:commandLink action="#{language.change('ar')}" value="Arabic" /><br />
+	  	</h:form>
+	    <h:outputText value="#{msg.hello}" />
 	  </ui:insert>
 	</div>
 	
@@ -36,9 +43,9 @@
 	  </ui:insert>
 	</div>
 	
-	<!-- <h:outputScript library="js" name="jquery-2.1.1.min.js"></h:outputScript> -->
-	
+	<h:outputScript library="js/jquery" name="jquery-2.1.1.min.js" />
 	<h:outputScript library="webjars/bootstrap/3.2.0/js" name="bootstrap.min.js"/>
+	<h:outputScript library="js/adminLTE" name="app.js" />
 </h:body>
 
 </html>
