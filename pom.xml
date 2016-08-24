@@ -55,7 +55,7 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat</artifactId>
 				<version>8</version>
-			</plugin>
+			</plugin> 
 		</plugins>
 	</build>
 </project>
