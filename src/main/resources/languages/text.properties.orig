@@ -1,4 +1,7 @@
 hello=Hello
+<<<<<<< HEAD
 selectALanguage=select a language
 stock=stock system
+=======
 selectALanguage=select a language
+>>>>>>> 7a54115c3e12c5dddeb19a04919cb8852099552c

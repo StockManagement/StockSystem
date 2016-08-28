@@ -33,6 +33,24 @@
 				(text_ar.properties for arabic text)
 			 -->
 			<h:outputText value="#{msg.hello}" />
+			
+			<!-- use home controller -->
+			
+			<h:outputText value="#{home.name}" id="out"/>
+			
+			<h:form id="createUpdateDisc">
+				<h:inputText value="#{home.name}" id="in"/>	
+				<h:commandButton value="click me!!" action="#{home.myAction}" >
+					<f:ajax execute="in"  render=":out"></f:ajax>
+				</h:commandButton>	
+			</h:form>
+		
+			
+			<h:form>
+				<h:inputText value="#{home.name2}" />	
+				<h:commandButton value="click me!!" action="#{home.myAction}" ></h:commandButton>
+			</h:form>
+			
 			<br />
 	 		   Hello this is your home page <br />
 	 		   Dear development team 	<br />

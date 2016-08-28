@@ -14,10 +14,12 @@
 			<supported-locale>ar</supported-locale>
 			<supported-locale>fr</supported-locale>
 		</locale-config>
+<<<<<<< HEAD
 		
 		<action-listener>org.primefaces.application.DialogActionListener</action-listener>
 		<navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
 		<view-handler>org.primefaces.application.DialogViewHandler</view-handler>
-
+=======
+>>>>>>> 7a54115c3e12c5dddeb19a04919cb8852099552c
 	</application>
 </faces-config>

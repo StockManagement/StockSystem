@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 /Users/housseinmonzer/Developer/Workspace/JSF Workspace/Stock/src/main/java/shared/RedirectController.java
 /Users/housseinmonzer/Developer/Workspace/JSF Workspace/Stock/src/main/java/utility/Helper.java
 /Users/housseinmonzer/Developer/Workspace/JSF Workspace/Stock/src/main/java/utility/LanguageController.java
 /Users/housseinmonzer/Developer/Workspace/JSF Workspace/Stock/src/main/java/shared/GlobalController.java
 /Users/housseinmonzer/Developer/Workspace/JSF Workspace/Stock/src/main/java/home/HomeController.java
 /Users/housseinmonzer/Developer/Workspace/JSF Workspace/Stock/src/main/java/page1/Page1Controller.java
-
-
+=======
+/Users/mohamad/Developer/JavaWorkspace/Stock/src/main/java/utility/LanguageController.java
+/Users/mohamad/Developer/JavaWorkspace/Stock/src/main/java/utility/Helper.java
+>>>>>>> 7a54115c3e12c5dddeb19a04919cb8852099552c

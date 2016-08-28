@@ -30,6 +30,8 @@
     <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
   </listener>
   
+<<<<<<< HEAD
+=======
    <filter>
       <filter-name>forceUTF8CharSet</filter-name>
       <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -43,5 +45,5 @@
       <filter-name>forceUTF8CharSet</filter-name>
       <url-pattern>*</url-pattern>
     </filter-mapping>
-
+>>>>>>> 7a54115c3e12c5dddeb19a04919cb8852099552c
 </web-app>
