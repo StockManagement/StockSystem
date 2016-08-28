@@ -10,12 +10,15 @@
 <ui:composition template="/template/master.xhtml">
 	<!-- header page title -->
 	<ui:define name="title">#{msg.stock}</ui:define>
+	<ui:define name="css">
+			<h:outputStylesheet library="css/map" name="mapControl.css"/>
+	</ui:define>
 	
 	<!-- page body -->
 	<ui:define name="content">
 		<!-- body page title -->
 		
-		<section class="content">
+		<section class="content map-padding">
 			<link href="https://fonts.googleapis.com/css?family=Roboto:400,100"
 				rel='stylesheet' type="text/css" />
 			<script src="https://maps.googleapis.com/maps/api/js?v=3.24&amp;libraries=places&amp;key=AIzaSyDk2mI_3ejU5J7pBYfTiGhpqbvtjbn_I88"></script>
