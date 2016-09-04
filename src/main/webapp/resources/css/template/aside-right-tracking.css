@@ -1,4 +1,7 @@
-.selected
-{
+.selected {
 	background-color: #666;
+}
+
+.tab-content {
+	padding: 0px 15px !important;
 }

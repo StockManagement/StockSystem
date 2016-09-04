@@ -11,28 +11,36 @@
 	<!-- header page title -->
 	<ui:define name="title">#{msg.stock}</ui:define>
 	<ui:define name="css">
-			<h:outputStylesheet library="css/map" name="mapControl.css"/>
+		<h:outputStylesheet library="css/map" name="mapControl.css" />
 	</ui:define>
-	
+
 	<!-- page body -->
 	<ui:define name="content">
 		<!-- body page title -->
-		
+
 		<section class="content map-padding">
-			<link href="https://fonts.googleapis.com/css?family=Roboto:400,100"
-				rel='stylesheet' type="text/css" />
-			<script src="https://maps.googleapis.com/maps/api/js?v=3.24&amp;libraries=places&amp;key=AIzaSyDk2mI_3ejU5J7pBYfTiGhpqbvtjbn_I88"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,100"
+			rel='stylesheet' type="text/css" />
+		<script
+			src="https://maps.googleapis.com/maps/api/js?v=3.24&amp;libraries=places&amp;key=AIzaSyDk2mI_3ejU5J7pBYfTiGhpqbvtjbn_I88"></script>
+
+		<h:outputScript library="primefaces" name="jquery/jquery.js" /> <h:outputScript
+			library="js/map" name="ol3.js" />
+
+		<div style="height: 1000px; width: 100%; position: absolute;">
+			<div id='openLayersMap' class='fill' />
+
+			<div id='googleMap' class='fill' style="height: 100%; width: 100%;" />
 			
-			<h:outputScript library="primefaces" name="jquery/jquery.js" />
-			<h:outputScript library="js/map" name="ol3.js" />
-			
-			 <div style="height:1000px; width:100%; position: absolute;">
-				<div id='openLayersMap' class='fill' />
-				<div id='googleMap' class='fill' style="height:100%; width:100%;"/>
+		</div>
+<div id="popup" class="ol-popup">
+				<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+				<div id="popup-content"></div>
 			</div>
-			<h:outputScript library="js/map" name="google-map.js" />
-			<h:outputScript library="js/map" name="mapControl.js" />
-		</section>
+		<h:outputScript library="js/map" name="google-map.js" /> 
+		<h:outputScript library="js/map" name="mapControl.js" />
+		<h:outputScript library="js/map" name="mapControlEvent.js" />
+		 </section>
 	</ui:define>
 </ui:composition>
 </html>
