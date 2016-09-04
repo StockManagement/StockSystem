@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/template/master.xhtml">
+<ui:composition template="/template/master-Tracking.xhtml">
 	<!-- header page title -->
 	<ui:define name="title">#{msg.stock}</ui:define>
 	<ui:define name="css">
@@ -26,7 +26,7 @@
 			<h:outputScript library="primefaces" name="jquery/jquery.js" />
 			<h:outputScript library="js/map" name="ol3.js" />
 			
-			 <div style="height:100%; width:100%; position: absolute;">
+			 <div style="height:1000px; width:100%; position: absolute;">
 				<div id='openLayersMap' class='fill' />
 				<div id='googleMap' class='fill' style="height:100%; width:100%;"/>
 			</div>

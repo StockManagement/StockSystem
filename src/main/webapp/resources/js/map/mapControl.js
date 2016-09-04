@@ -6,6 +6,8 @@ var mapControlVariablesModule = function(){
 	var self = this;
 	var googleMap;
 	var olMap;
+	var landmarkSource;
+	var landmarkLayer;
 	var zoomLevel;
 	var center;
 	
@@ -14,10 +16,16 @@ var mapControlVariablesModule = function(){
 	function setOlMap(olMap){self.olMap = olMap;}
 	
 	function setZoomLevel(zoomLevel) {this.zoomLevel = zoomLevel;}
-	function getZoomLevel(zoomLevel) {return this.zoomLevel;}
+	function getZoomLevel() {return this.zoomLevel;}
 	
 	function setCenter(center) {this.center = center;}
 	function getCenter() {return this.center;}
+	
+	function getLandmarkSource(){return self.landmarkSource;}
+	function setLandmarkSource(landmarkSource){self.landmarkSource = landmarkSource;}
+	
+	function getLandmarkLayer(){return self.landmarkLayer;}
+	function setlandmarkLayer(landmarkSource){self.landmarkLayer = landmarkLayer;}
 	// --------------End getters and setters ------------- //
 	
 	return {
@@ -27,6 +35,10 @@ var mapControlVariablesModule = function(){
 		setZoomLevel: setZoomLevel,
 		getCenter: getCenter,
 		setCenter: setCenter,
+		getLandmarkSource:getLandmarkSource,
+		setLandmarkSource:setLandmarkSource,
+		getLandmarkLayer:getLandmarkLayer,
+		setlandmarkLayer:setlandmarkLayer
 	}
 }();
 
@@ -69,7 +81,7 @@ var mapControlModule = function(){
 		//Initialize open layer map
 		openLayersMapDiv = document.getElementById('openLayersMap');
 		var map = new ol.Map({
-			controls : ol.control.defaults({ attribution: false }).extend(
+			funct : ol.control.defaults({ attribution: false }).extend(
 					[ new ol.control.ScaleLine({
 						unit : 'degrees',
 					}) ]),
@@ -87,8 +99,9 @@ var mapControlModule = function(){
 			view : openLayersView
 		});
 		mapControlVariablesModule.setOlMap(map);
-		
+		initLandmarkLayer();
 		googleMapModule.init('googleMap', 'openLayersMap', openLayersView, olMap, setMapHeight);
+		
 	}
 	
 	
@@ -117,7 +130,37 @@ var mapControlModule = function(){
 	
 	//------------------End Map Initialization -------------------- //
 
+	// Layers Initialization---------------------------------------//
+	function initLandmarkLayer(){
 	
+		var source = new ol.source.Vector({
+			wrapX : false
+		});
+		
+		var vectorlayer = new ol.layer.Vector({
+			source : source,
+			style : new ol.style.Style({
+				fill : new ol.style.Fill({
+					color : 'rgba(255, 255, 255, 0.2)'
+				}),
+				stroke : new ol.style.Stroke({
+					color : '#ffcc33',
+					width : 2
+				}),
+				image : new ol.style.Circle({
+					radius : 7,
+					fill : new ol.style.Fill({
+						color : '#ffcc33'
+					})
+				})
+			})
+		});
+		mapControlVariablesModule.setLandmarkSource(source);
+		mapControlVariablesModule.setlandmarkLayer(vectorlayer);
+		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
+		
+	}
+	//------------------End Layers Initializations------------------//
 	
 	// ---------------------- Map Utilities -------------------------- //
 	function zoomToVectorExtent(vectorLayer) {
@@ -131,11 +174,11 @@ var mapControlModule = function(){
 	
 	// --------------------- page functions --------------- //
 	function setMapHeight(){
-		var mapOffset = $("#googleMap").offset(); //$(".main-header").outerHeight();
-		var mapHeight = $(window).height() - mapOffset.top;
-		var mapWidth = $(window).width() - mapOffset.left;
-		$("#googleMap").parent().height(mapHeight);
-		$("#googleMap").parent().width(mapWidth-3) ;
+//		var mapOffset = $("#googleMap").offset(); //$(".main-header").outerHeight();
+//		var mapHeight = $(window).height() - mapOffset.top;
+//		var mapWidth = $(window).width() - mapOffset.left;
+//		$("#googleMap").parent().height(mapHeight);
+//		$("#googleMap").parent().width(mapWidth-3) ;
 		
 	}
 	
@@ -147,52 +190,56 @@ var mapControlModule = function(){
 	// --------------- END page sunctions ------------ //
 	
 	
-	function getFeaturesService(){
-		var iconFeatures=[];
-
-		var iconFeature = new ol.Feature({
-		  geometry: new ol.geom.Point(ol.proj.transform([-72.0704, 46.678], 'EPSG:4326',     
-		  'EPSG:3857')),
-		  name: 'Null Island',
-		  population: 4000,
-		  rainfall: 500
-		});
-
-		var iconFeature1 = new ol.Feature({
-		  geometry: new ol.geom.Point(ol.proj.transform([-73.1234, 45.678], 'EPSG:4326',     
-		  'EPSG:3857')),
-		  name: 'Null Island Two',
-		  population: 4001,
-		  rainfall: 501
-		});
-
-		iconFeatures.push(iconFeature);
-		iconFeatures.push(iconFeature1);
-
-		var vectorSource = new ol.source.Vector({
-		  features: iconFeatures //add an array of features
-		});
-
-		var iconStyle = new ol.style.Style({
-		  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-		    anchor: [0.5, 46],
-		    anchorXUnits: 'fraction',
-		    anchorYUnits: 'pixels',
-		    opacity: 0.75,
-		    src: 'img/icon-red.png'
-		  }))
-		});
-
-		var vectorLayer = new ol.layer.Vector({
-		  source: vectorSource,
-		  style: iconStyle
-		});
-		
-		mapControlVariablesModule.getOlMap().addLayer(vectorLayer);
-		zoomToVectorExtent(vectorLayer);
-	}
+//	function getFeaturesService(){
+//		var iconFeatures=[];
+//
+//		var iconFeature = new ol.Feature({
+//		  geometry: new ol.geom.Point(ol.proj.transform([-72.0704, 46.678], 'EPSG:4326',     
+//		  'EPSG:3857')),
+//		  name: 'Null Island',
+//		  population: 4000,
+//		  rainfall: 500
+//		});
+//
+//		var iconFeature1 = new ol.Feature({
+//		  geometry: new ol.geom.Point(ol.proj.transform([-73.1234, 45.678], 'EPSG:4326',     
+//		  'EPSG:3857')),
+//		  name: 'Null Island Two',
+//		  population: 4001,
+//		  rainfall: 501
+//		});
+//
+//		iconFeatures.push(iconFeature);
+//		iconFeatures.push(iconFeature1);
+//
+//		var vectorSource = new ol.source.Vector({
+//		  features: iconFeatures //add an array of features
+//		});
+//
+//		var iconStyle = new ol.style.Style({
+//		  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+//		    anchor: [0.5, 46],
+//		    anchorXUnits: 'fraction',
+//		    anchorYUnits: 'pixels',
+//		    opacity: 0.75,
+//		    src: 'img/icon-red.png'
+//		  }))
+//		});
+//
+//		var vectorLayer = new ol.layer.Vector({
+//		  source: vectorSource,
+//		  style: iconStyle
+//		});
+//		
+//		mapControlVariablesModule.getOlMap().addLayer(vectorLayer);
+//		zoomToVectorExtent(vectorLayer);
+//	}
+//	
 	
-	
+
+  
+
+    
 	return {
 		init: init,
 		zoomToVectorExtent: zoomToVectorExtent,
