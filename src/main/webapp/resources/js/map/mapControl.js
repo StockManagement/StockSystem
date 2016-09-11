@@ -9,6 +9,7 @@ var mapControlVariablesModule = function() {
 	var fpControl;
 	var landmarkSource;
 	var landmarkLayer;
+	var usersLayer;
 
 	var zoomLevel;
 	var center;
@@ -52,8 +53,15 @@ var mapControlVariablesModule = function() {
 	function getLandmarkLayer() {
 		return self.landmarkLayer;
 	}
-	function setlandmarkLayer(landmarkSource) {
+	function setLandmarkLayer(landmarkLayer) {
 		self.landmarkLayer = landmarkLayer;
+	}
+	
+	function getUsersLayer(){
+		return self.usersLayer;
+	}
+	function setUsersLayer(usersLayer){
+		self.usersLayer = usersLayer;
 	}
 	// --------------End getters and setters ------------- //
 
@@ -69,7 +77,9 @@ var mapControlVariablesModule = function() {
 		getLandmarkSource : getLandmarkSource,
 		setLandmarkSource : setLandmarkSource,
 		getLandmarkLayer : getLandmarkLayer,
-		setlandmarkLayer : setlandmarkLayer
+		setLandmarkLayer : setLandmarkLayer, 
+		getUsersLayer: getUsersLayer,
+		setUsersLayer: setUsersLayer,
 	}
 }();
 
@@ -132,6 +142,7 @@ var mapControlModule = function() {
 		mapControlVariablesModule.setOlMap(map);
 		eventMapControlModule.init();
 		initLandmarkLayer();
+		initUsersLayer();
 //		createFeaturesForTest();
 		googleMapModule.init('googleMap', 'openLayersMap', openLayersView,
 				olMap, setMapHeight);
@@ -218,9 +229,24 @@ var mapControlModule = function() {
 		});
 
 		mapControlVariablesModule.setLandmarkSource(source);
-		mapControlVariablesModule.setlandmarkLayer(vectorlayer);
+		mapControlVariablesModule.setLandmarkLayer(vectorlayer);
 		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
 
+	}
+	
+	function initUsersLayer() {
+		
+		var source = new ol.source.Vector({
+			wrapX : false
+		});
+		
+		var vectorlayer = new ol.layer.Vector({
+			source : source,
+		});
+		
+		mapControlVariablesModule.setUsersLayer(vectorlayer);
+		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
+		
 	}
 
 	// ------------------End Layers Initializations------------------//
@@ -303,10 +329,17 @@ var mapControlModule = function() {
 	// }
 	//	
 	
-	function addPointToLayer(x, y, style){
+	/***
+	 * @param x
+	 * @param y
+	 * @param style
+	 * @param layer
+	 */
+	function addPointToLayer(layer, x, y, style){
 		// -10
 		// -25
-		var source = mapControlVariablesModule.getLandmarkSource();
+		if(layer == 'undefined') return;
+		var source = layer.getSource();
 		var thing = new ol.geom.Point( 
 			    ol.proj.transform([x,y], EPSG_4326, EPSG_3857)
 			);  
@@ -317,7 +350,7 @@ var mapControlModule = function() {
 			if(featurething)
 				featurething.setStyle(style);
 			
-			landmarkSource.addFeature( featurething );
+			source.addFeature( featurething );
 	}
 	
 	function computeFeatureStyle(json) {

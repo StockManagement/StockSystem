@@ -1,3 +1,17 @@
+// -------------------- testing mapControl.js ------------------ //
+function testAddPointToLayer(){
+	var styler = new stylerModule();
+	var pointOption = styler.default_point_options;
+	var pointStyle = styler.createPoint(pointOption);
+	var opt_options = {image: pointStyle};
+	var style = styler.createStyle(opt_options); 
+	
+	var landmarkLayer = mapControlVariablesModule.getLandmarkLayer();
+	mapControlModule.addPointToLayer(landmarkLayer, -10, -25, style);
+}
+// ------------------ END testing mapControl.js ------------------ //
+
+// -------------------- testing styler.js ------------------------ //
 function testDefaultPoint(){
 	var styler = new stylerModule();
 	var pointOption = styler.default_point_options;
@@ -48,3 +62,13 @@ function testDefaultImage(){
 	var source = mapControlVariablesModule.getLandmarkSource();
 	source.addFeature(feature);
 }
+
+//------------------ END testing styler.js ------------------------ //
+
+//-------------------- testing user.js ------------------------ //
+function testAddUsersToMap(){
+	var landmarkLayer = mapControlVariablesModule.getLandmarkLayer();
+	var users = userModule.getUsers();
+	userModule.addUsersToLayer(users, landmarkLayer);
+}
+//------------------ END testing user.js ------------------------ //
