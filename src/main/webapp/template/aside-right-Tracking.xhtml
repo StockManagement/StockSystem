@@ -6,20 +6,22 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+	<h:outputStylesheet library="css/map/user" name="user.css" />
+	
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
 
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-map"></i></a></li>
+      <li><a href="#control-sidebar-users-tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
       <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
      
       <!-- Home tab content -->
-     
-      <div class="tab-pane" id="control-sidebar-home-tab">
+      <div class="tab-pane active" id="control-sidebar-home-tab">
         <h3 class="control-sidebar-heading "> Landmarks</h3>
         <ul class="control-sidebar-menu " >
     
@@ -102,8 +104,40 @@
         <!-- /.control-sidebar-menu -->
 
       </div>
-      <!-- /.tab-pane -->
+      <!-- END Home tab-pane -->
       
+      
+      <!-- Users tab content -->
+      <div class="tab-pane" id="control-sidebar-users-tab">
+        <h3 class="control-sidebar-heading">Users</h3>
+        <div  class="sidebar">
+        <div class="input-group">
+          <input type="text" name="search" class="form-control" placeholder="Search..."></input>
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="searchLandmark-btn" class="btn btn-flat btn-success "><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </div>
+        <ul class="control-sidebar-menu">
+          <li>
+            <div class="widget widget-shadow">
+                    <div class="widget-content text-center bg-white padding-20 btn-success ">
+                      <a href="#" class="avatar margin-bottom-5">
+                        <img class="img-responsive float-right user-image" src= "../../resources/img/user2-160x160.jpg" alt="Viola_photo" />
+                      </a>
+                      <div class="user-name">Viola</div>
+                      <div class="friend-title margin-bottom-20 blue-grey-400">
+                        Hi~ I'm Viola.
+                      </div>
+                    </div>
+                  </div>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- END Users tab-pane -->
       
       
       
