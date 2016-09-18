@@ -37,10 +37,11 @@
 			<div id='googleMap' class='fill' style="height: 100%; width: 100%;" />
 			
 		</div>
-<div id="popup" class="ol-popup">
+		<div id="popup" class="ol-popup">
 				<a href="#" id="popup-closer" class="ol-popup-closer"></a>
 				<div id="popup-content"></div>
-			</div>
+		</div>
+		<h:outputText  value="#{mapControl.usersJson}"/>
 		<h:outputScript library="js/map" name="google-map.js" /> 
 		<h:outputScript library="js/map" name="mapControl.js" />
 		<h:outputScript library="js/map" name="mapControlEvent.js" />
