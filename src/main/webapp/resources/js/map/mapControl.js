@@ -183,49 +183,7 @@ var mapControlModule = function() {
 
 		var vectorlayer = new ol.layer.Vector({
 			source : source,
-//			style : new ol.style.Style({
-//				fill : new ol.style.Fill({
-//					color : 'rgba(255, 255, 255, 0.2)'
-//				}),
-//				stroke : new ol.style.Stroke({
-//					color : '#ffcc33',
-//					width : 2
-//				}),
-//				image : new ol.style.Circle({
-//					radius : 7,
-//					fill : new ol.style.Fill({
-//						color : '#ffcc33'
-//					})
-//				})
-//			})
-//			style: (function() {
-//			    var style = new ol.style.Style({
-//			      image: new ol.style.Icon({
-//			        scale: 0.04,
-//			        src: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/57/Circle-style-warning.svg/1024px-Circle-style-warning.svg.png'
-//			      }),
-//			      text: new ol.style.Text({
-//			        text: 'Hello',
-//			        scale: 1.3,
-//			        fill: new ol.style.Fill({
-//			          color: '#000000'
-//			        }),
-//			        stroke: new ol.style.Stroke({
-//			          color: '#FFFF99',
-//			          width: 3.5
-//			        })
-//			      })
-//			    });
-//			    var styles = [style];
-//			    return function(feature, resolution) {
-////			      style.getText().setText(feature.get("name"));
-//			    	if(feature.get('style')) {
-//			    		var featureStyle = feature.get('style');
-//			    		return [featureStyle];
-//			    	}
-//			    	return styles;  
-//			    };
-//			  })()
+
 		});
 
 		mapControlVariablesModule.setLandmarkSource(source);
@@ -263,12 +221,15 @@ var mapControlModule = function() {
 
 	// --------------------- page functions --------------- //
 	function setMapHeight() {
-		// var mapOffset = $("#googleMap").offset();
-		// //$(".main-header").outerHeight();
-		// var mapHeight = $(window).height() - mapOffset.top;
-		// var mapWidth = $(window).width() - mapOffset.left;
-		// $("#googleMap").parent().height(mapHeight);
-		// $("#googleMap").parent().width(mapWidth-3) ;
+		var mapOffset = $("#googleMap").offset();
+		//$(".main-header").outerHeight();
+		var mapHeight = $(window).height() - mapOffset.top;
+		var mapWidth = $(window).width() - mapOffset.left;
+		 
+		 $("#map").height(mapHeight);
+		 $("#googleMap").height(mapHeight);
+		 $("#openLayersMap").height(mapHeight);
+		
 
 	}
 

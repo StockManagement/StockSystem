@@ -12,6 +12,7 @@
 	<ui:define name="title">#{msg.stock}</ui:define>
 	<ui:define name="css">
 		<h:outputStylesheet library="css/map" name="mapControl.css" />
+		<h:outputStylesheet library="css/map" name="ol.css" />
 	</ui:define>
 
 	<!-- page body -->
@@ -30,13 +31,15 @@
 		<h:outputScript library="js/map/user" name="user.js" />
 		
 		<h:outputScript library="js/map/shared" name="unitTest.js" />
-		
-		<div style="height: 1000px; width: 100%; position: absolute;">
+
+    
+		<div id="map" class="map">
 			<div id='openLayersMap' class='fill' />
 
-			<div id='googleMap' class='fill' style="height: 100%; width: 100%;" />
+			<div id='googleMap' class='fill' />
 			
 		</div>
+	
 <div id="popup" class="ol-popup">
 				<a href="#" id="popup-closer" class="ol-popup-closer"></a>
 				<div id="popup-content"></div>
