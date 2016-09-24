@@ -50,9 +50,9 @@ var eventMapControlModule = function() {
 					return true;
 				});
 		if (hit) {
-			mapControlVariablesModule.getOlMap().getTarget().style.cursor = 'pointer';
+			//mapControlVariablesModule.getOlMap().getTarget().style.cursor = 'pointer';
 		} else {
-			mapControlVariablesModule.getOlMap().getTarget().style.cursor = '';
+			//mapControlVariablesModule.getOlMap().getTarget().style.cursor = '';
 		}
 
 	}

@@ -10,7 +10,6 @@ var mapControlVariablesModule = function() {
 	var landmarkSource;
 	var landmarkLayer;
 	var usersLayer;
-
 	var zoomLevel;
 	var center;
 
@@ -178,7 +177,7 @@ var mapControlModule = function() {
 	function initLandmarkLayer() {
 
 		var source = new ol.source.Vector({
-			wrapX : false
+		//	wrapX : false
 		});
 
 		var vectorlayer = new ol.layer.Vector({

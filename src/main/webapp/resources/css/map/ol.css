@@ -230,6 +230,7 @@ button.ol-full-screen-true:after {
  background: rgba(255, 255, 255, .4); border-radius: 4px; outline: 0;
  overflow: hidden; width: 1.5675em; height: 200px; padding: 3px;
  margin: 0
+
 }
 
 .ol-zoomslider-thumb {
