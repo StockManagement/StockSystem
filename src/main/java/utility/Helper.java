@@ -6,13 +6,14 @@ import java.util.Properties;
 
 import javax.faces.context.FacesContext;
 
-public class Helper {	
+public class Helper {
+
 	// Get the Configuration Parameter Value by Key
 	public static String getConfig(String key) {
 		try {
 			Properties prop = new Properties();
 			String propFile = "../config/config.properties";
-			
+
 			InputStream inputStream = Helper.class.getResourceAsStream(propFile);
 			prop.load(inputStream);
 			if (inputStream == null) {
@@ -23,4 +24,5 @@ public class Helper {
 			return key;
 		}
 	}
+
 }

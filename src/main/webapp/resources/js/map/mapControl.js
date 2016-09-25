@@ -146,7 +146,7 @@ var mapControlModule = function() {
 //		createFeaturesForTest();
 		googleMapModule.init('googleMap', 'openLayersMap', openLayersView,
 				olMap, setMapHeight);
-
+		userModule.init();
 	}
 
 	function setMapZoomAndCenter() {
@@ -183,49 +183,6 @@ var mapControlModule = function() {
 
 		var vectorlayer = new ol.layer.Vector({
 			source : source,
-//			style : new ol.style.Style({
-//				fill : new ol.style.Fill({
-//					color : 'rgba(255, 255, 255, 0.2)'
-//				}),
-//				stroke : new ol.style.Stroke({
-//					color : '#ffcc33',
-//					width : 2
-//				}),
-//				image : new ol.style.Circle({
-//					radius : 7,
-//					fill : new ol.style.Fill({
-//						color : '#ffcc33'
-//					})
-//				})
-//			})
-//			style: (function() {
-//			    var style = new ol.style.Style({
-//			      image: new ol.style.Icon({
-//			        scale: 0.04,
-//			        src: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/57/Circle-style-warning.svg/1024px-Circle-style-warning.svg.png'
-//			      }),
-//			      text: new ol.style.Text({
-//			        text: 'Hello',
-//			        scale: 1.3,
-//			        fill: new ol.style.Fill({
-//			          color: '#000000'
-//			        }),
-//			        stroke: new ol.style.Stroke({
-//			          color: '#FFFF99',
-//			          width: 3.5
-//			        })
-//			      })
-//			    });
-//			    var styles = [style];
-//			    return function(feature, resolution) {
-////			      style.getText().setText(feature.get("name"));
-//			    	if(feature.get('style')) {
-//			    		var featureStyle = feature.get('style');
-//			    		return [featureStyle];
-//			    	}
-//			    	return styles;  
-//			    };
-//			  })()
 		});
 
 		mapControlVariablesModule.setLandmarkSource(source);
@@ -281,53 +238,7 @@ var mapControlModule = function() {
 
 	// --------------- END page sunctions ------------ //
 
-	// function getFeaturesService(){
-	// var iconFeatures=[];
-	//
-	// var iconFeature = new ol.Feature({
-	// geometry: new ol.geom.Point(ol.proj.transform([-72.0704, 46.678],
-	// 'EPSG:4326',
-	// 'EPSG:3857')),
-	// name: 'Null Island',
-	// population: 4000,
-	// rainfall: 500
-	// });
-	//
-	// var iconFeature1 = new ol.Feature({
-	// geometry: new ol.geom.Point(ol.proj.transform([-73.1234, 45.678],
-	// 'EPSG:4326',
-	// 'EPSG:3857')),
-	// name: 'Null Island Two',
-	// population: 4001,
-	// rainfall: 501
-	// });
-	//
-	// iconFeatures.push(iconFeature);
-	// iconFeatures.push(iconFeature1);
-	//
-	// var vectorSource = new ol.source.Vector({
-	// features: iconFeatures //add an array of features
-	// });
-	//
-	// var iconStyle = new ol.style.Style({
-	// image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-	// anchor: [0.5, 46],
-	// anchorXUnits: 'fraction',
-	// anchorYUnits: 'pixels',
-	// opacity: 0.75,
-	// src: 'img/icon-red.png'
-	// }))
-	// });
-	//
-	// var vectorLayer = new ol.layer.Vector({
-	// source: vectorSource,
-	// style: iconStyle
-	// });
-	//		
-	// mapControlVariablesModule.getOlMap().addLayer(vectorLayer);
-	// zoomToVectorExtent(vectorLayer);
-	// }
-	//	
+
 	
 	/***
 	 * @param x
@@ -345,6 +256,7 @@ var mapControlModule = function() {
 			);  
 			var featurething = new ol.Feature({
 			    name: "Thing",
+			    featureCoordinates: {x: x, y: y},
 			    geometry: thing,
 			});
 			if(featurething)
@@ -390,6 +302,52 @@ var mapControlModule = function() {
 					}
 				});
 	}
+	
+	function zoomToLocation(x,  y){
+		if(x!=undefined && y!=undefined)
+			mapControlVariablesModule.getOlMap().getView().setCenter([x,y]);
+	}
+	
+	function getFeatureByCoordinates(layer, x, y){
+		var features = layer.getSource().getFeatures();
+		for(var i=0; i< features.length; i++){
+			var featureCoordinate = features[i].get('featureCoordinates');
+			if(featureCoordinate != undefined && featureCoordinate.x != undefined && featureCoordinate.y != undefined
+					&& featureCoordinate.x == x && featureCoordinate.y == y)
+				return features[i];
+		}
+	}
+	
+	function animateFeature(feature){
+		var interval = window.setInterval(function(){
+		    animate(feature);
+		},80);
+
+	}
+	
+	function animate(feature)
+	{
+		if(feature.data == undefined || feature.data.size == undefined)
+			feature.data = {size: 10};
+		
+	    feature.data.size += 1;
+
+	    feature.style = {
+	        pointRadius: feature.data.size,  // I will change only the size of the feature
+	        fillColor: "#ffcc66",
+	        fillOpacity: 0,
+	        strokeColor: "#ff9933",
+	        strokeWidth: 2,
+	        graphicZIndex: 1
+	    };
+
+	   feature.layer.redraw();
+
+	    if(feature.data.size == 30){
+	        console.info(interval);
+	        window.clearInterval(interval);
+	    }
+	}
 
 	return {
 		init : init,
@@ -397,89 +355,10 @@ var mapControlModule = function() {
 		setMapZoomAndCenter : setMapZoomAndCenter,
 		addPointToLayer: addPointToLayer,
 		refreshMapLayers: refreshMapLayers,
-		computeFeatureStyle: computeFeatureStyle,
-		
-		// ----------- testing functions -------- //
-		getJsonStyleForTest: getJsonStyleForTest,
-		createFeaturesForTest: createFeaturesForTest,
+		computeFeatureStyle: computeFeatureStyle,	
+		zoomToLocation: zoomToLocation,
+		getFeatureByCoordinates: getFeatureByCoordinates,
+		animateFeature: animateFeature
 	}
 	
-	
-	// ------------------- unit test ------------ //
-	function getJsonStyleForTest(){
-		var json = {};
-	    json.radius = 15;
-		json.color = 'rgba( 50, 50, 200, 0.5)';
-		json.strokeColor = 'rgba(120,30,100,0.8)';
-		json.strokeWidth = 3;
-		json.font = '12px helvetica,sans-serif';
-		json.text = 'test';
-		json.textColor = "#000";
-		json.textStrokeWidth = 1;
-		return json;
-	}
-	
-	function createFeaturesForTest(withStyle){
-		var source = mapControlVariablesModule.getLandmarkSource();
-		withStyle = typeof(withStyle) == "undefined"? true :withStyle ;
-		 // Crate a style instance given feature's properties name and radius.
-        function computeFeatureStyleLocal(feature) {
-            return new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: feature.get('radius'),
-                    fill: new ol.style.Fill({
-                        color: 'rgba(100,50,200,0.5)'
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: 'rgba(120,30,100,0.8)',
-                        width: 3
-                    })
-                }),
-                text: new ol.style.Text({
-                    font: '12px helvetica,sans-serif',
-                    text: feature.get('name'),
-                    rotation: 360 * rnd * Math.PI / 180,
-                    fill: new ol.style.Fill({
-                        color: '#000'
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: '#fff',
-                        width: 2
-                    })
-                })
-            });
-        }
-
-        
-		 var i, lat, lon, geom, feature, features = [], style, rnd;
-         for(i=0; i< 2; i++) {
-             lat = -10 - i *2;
-             lon = -25 - i *2;
-
-             geom = new ol.geom.Point(
-                 ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')
-             );
-
-             rnd = Math.random();
-             feature = new ol.Feature({
-                 geometry: geom,
-                 radius: rnd * 30,
-                 name: 'feature [' + i + ']' 
-             });
-             features.push(feature);
-             
-             var json = getJsonStyleForTest();
-             style = computeFeatureStyle(json);
-             feature.setStyle(style);
-//             source.addFeature(feature);
-         }
-         return features;
-	}
-	
-//	var json = mapControlModule.getJsonStyleForTest();
-//	var features = mapControlModule.createFeaturesForTest();
-//	var feature = features[0];
-//	var source = mapControlVariablesModule.getLandmarkSource();
-//	var style = mapControlModule.computeFeatureStyle(json);
-//	source.addFeature(feature);
 }();

@@ -2,10 +2,8 @@ var userModule = function() {
 	self = this;
 	var defaultUser = function(){
 		return {
-			location:{
-				x : -10,
-				y : -25 
-			},
+			x : -10,
+			y : -25, 
 			name: 'default user',
 			style: createUserStyle()
 		};
@@ -39,8 +37,6 @@ var userModule = function() {
 			};
 			users.push(user);
 		}
-		// add default user to users
-//		users.push(defaultUser);
 		return users;
 	}
 	
@@ -50,7 +46,7 @@ var userModule = function() {
 	 * @returns {Boolean}
 	 */
 	isValidUser = function(user){
-		if(user == 'undefined' || user.location == 'undefined' || user.location.x == 'undefined' || user.location.y == 'undefined') return false;
+		if(user == null || user.x == null || user.y == null) return false;
 		return true;
 	}
 	
@@ -63,10 +59,16 @@ var userModule = function() {
 	var addUserToLayer = function(user, layer){
 		var styler = new stylerModule();
 		var usersLayer = mapControlVariablesModule.getUsersLayer();
-		if (! isValidUser(user) || layer== 'undefined') return;
+		if (!isValidUser(user) || layer== 'undefined') return;
 		// ensure user style not null
-		if(user.style == 'undefined' || user.style == null) user.style = styler.defaultStyle();
-		mapControlModule.addPointToLayer(usersLayer, user.location.x, user.location.y, user.style);
+		if(user.style == 'undefined' || user.style == null) {
+			var pointOption = styler.default_point_options;
+			var pointStyle = styler.createPoint(pointOption);
+			var opt_options = {image: pointStyle};
+			var style = styler.createStyle(opt_options); 
+			user.style = style;
+		}
+		mapControlModule.addPointToLayer(usersLayer, user.x, user.y, user.style);
 	}
 	
 	/***
@@ -83,12 +85,26 @@ var userModule = function() {
 			addUserToLayer(users[i], layer);
 	}
 	
+	var init = function(){
+		var usersStr = $('#usersHidden').val();
+		var users = JSON.parse(usersStr);
+		var layer = mapControlVariablesModule.getLandmarkLayer();
+		addUsersToLayer(users, layer);
+	}
+	
+	function getFeatureByCoordinates(x, y){
+		var userLayer = mapControlVariablesModule.getUsersLayer();
+		return mapControlModule.getFeatureByCoordinates(userLayer, x, y);
+	}
+	
 	return {
 		defaultUser: defaultUser,
 		createUserStyle: createUserStyle,
 		getUsers: getUsers,
 		isValidUser: isValidUser,
 		addUserToLayer: addUserToLayer,
-		addUsersToLayer: addUsersToLayer
+		addUsersToLayer: addUsersToLayer,
+		init: init,
+		getFeatureByCoordinates: getFeatureByCoordinates
 	}
 }();

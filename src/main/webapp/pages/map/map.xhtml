@@ -5,13 +5,15 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/template/master-Tracking.xhtml">
 	<!-- header page title -->
 	<ui:define name="title">#{msg.stock}</ui:define>
 	<ui:define name="css">
 		<h:outputStylesheet library="css/map" name="mapControl.css" />
+		<h:outputStylesheet library="css/shared" name="ol.css" />
 	</ui:define>
 
 	<!-- page body -->
@@ -33,7 +35,6 @@
 		
 		<div style="height: 1000px; width: 100%; position: absolute;">
 			<div id='openLayersMap' class='fill' />
-
 			<div id='googleMap' class='fill' style="height: 100%; width: 100%;" />
 			
 		</div>
@@ -41,10 +42,13 @@
 				<a href="#" id="popup-closer" class="ol-popup-closer"></a>
 				<div id="popup-content"></div>
 		</div>
-		<h:outputText  value="#{mapControl.usersJson}"/>
 		<h:outputScript library="js/map" name="google-map.js" /> 
 		<h:outputScript library="js/map" name="mapControl.js" />
 		<h:outputScript library="js/map" name="mapControlEvent.js" />
+		
+		<!-- hidden inputs -->
+		<h:inputHidden id="usersHidden"  value="#{mapControl.usersJsonStr}"/>
+		
 		 </section>
 	</ui:define>
 </ui:composition>
