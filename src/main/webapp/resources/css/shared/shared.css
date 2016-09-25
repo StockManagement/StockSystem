@@ -7,7 +7,9 @@ hr {
     border-style: inset;
     border-width: 1px;
 } 
-
+.content{
+	padding:1px!important;
+}
 .hide{
 	display: none;
 }

@@ -10,7 +10,6 @@ var mapControlVariablesModule = function() {
 	var landmarkSource;
 	var landmarkLayer;
 	var usersLayer;
-
 	var zoomLevel;
 	var center;
 
@@ -178,7 +177,7 @@ var mapControlModule = function() {
 	function initLandmarkLayer() {
 
 		var source = new ol.source.Vector({
-			wrapX : false
+		//	wrapX : false
 		});
 
 		var vectorlayer = new ol.layer.Vector({
@@ -220,12 +219,15 @@ var mapControlModule = function() {
 
 	// --------------------- page functions --------------- //
 	function setMapHeight() {
-		// var mapOffset = $("#googleMap").offset();
-		// //$(".main-header").outerHeight();
-		// var mapHeight = $(window).height() - mapOffset.top;
-		// var mapWidth = $(window).width() - mapOffset.left;
-		// $("#googleMap").parent().height(mapHeight);
-		// $("#googleMap").parent().width(mapWidth-3) ;
+		var mapOffset = $("#googleMap").offset();
+		//$(".main-header").outerHeight();
+		var mapHeight = $(window).height() - mapOffset.top;
+		var mapWidth = $(window).width() - mapOffset.left;
+		 
+		 $("#map").height(mapHeight);
+		 $("#googleMap").height(mapHeight);
+		 $("#openLayersMap").height(mapHeight);
+		
 
 	}
 
