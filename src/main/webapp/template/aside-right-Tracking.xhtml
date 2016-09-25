@@ -32,12 +32,10 @@
 					<i id="iconAddlandmark" class="menu-icon fa fa-map-marker bg-green"></i>
 					<div class="menu-info">
 						<h4 class="control-sidebar-subheading">Add Landmark</h4>
-
 						<p>Click on the map to add new landmark</p>
 					</div>
 			</a></li>
-
-
+			
 		</ul>
 		<!-- /.control-sidebar-menu -->
 
@@ -101,17 +99,36 @@
 	<div class="tab-pane" id="control-sidebar-users-tab">
 		<h3 class="control-sidebar-heading">Users</h3>
 		<div class="sidebar">
-			<div class="input-group">
-				<input type="text" name="search" class="form-control"
-					placeholder="Search..."></input> <span class="input-group-btn">
-					<button type="submit" name="search" id="searchLandmark-btn"
-						class="btn btn-flat btn-success ">
-						<i class="fa fa-search"></i>
-					</button>
-				</span>
-			</div>
+			<ul class="control-sidebar-menu ">
+				<li><a id="a-Addlandmark" href="javascript:void(0)"
+					onclick="landmarkControl.addLandmarkOnClick();"> <!--       <i class="menu-icon:hover fa fa-birthday-cake bg-red"></i> -->
+						<i id="iconAddUser" class="menu-icon fa fa-map-marker bg-green"></i>
+						<div class="menu-info">
+							<h4 class="control-sidebar-subheading">Add User</h4>
+							<p>Click on the map to add new user</p>
+						</div>
+				</a></li>	
+			</ul>
 		</div>
-		<ul class="control-sidebar-menu">
+		
+		<h3 class="control-sidebar-heading">users</h3>
+		<!-- user search box -->
+		<div class="sidebar">
+			<form class="ui-filterable">
+				<div class="input-group">
+						<input type="text" name="search" class="form-control"
+							placeholder="find user..." id="myFilter"> </input> <span class="input-group-btn">
+							<button type="submit" name="search" id="searchLandmark-btn"
+								class="btn btn-flat btn-success ">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+				</div>
+			</form>
+		</div>
+			
+		<ul class="control-sidebar-menu"
+		 	data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true">
 			<ui:repeat var="user" value="#{mapControl.users}">
 				<c:set var="v_onClick" value="#{user.x} ne null? mapControlModule.zoomToLocation(#{user.x},#{user.y}): ''"></c:set>
 				<li>
@@ -202,5 +219,6 @@
 </aside>
 
 <div class="control-sidebar-bg"></div>
+<h:outputScript library="js/shared" name="shared.js" />
 <h:outputScript library="js/template" name="aside-right-tracking.js" />
 </html>

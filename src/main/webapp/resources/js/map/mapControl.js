@@ -4,7 +4,6 @@ $(function() {
 
 var mapControlVariablesModule = function() {
 	var self = this;
-	var googleMap;
 	var olMap;
 	var fpControl;
 	var landmarkSource;
@@ -14,6 +13,18 @@ var mapControlVariablesModule = function() {
 	var center;
 
 	// --------------- getters and setters ------------- //
+	function setGoogleLayer(googleLayer) {
+		return self.googleLayer = googleLayer;
+	}
+	function getGoogleLayer() {
+		return self.googleLayer;
+	}
+	function setOsmLayer(osmLayer) {
+		return self.osmLayer = osmLayer;
+	}
+	function getOsmLayer() {
+		return self.osmLayer;
+	}
 	function getOlMap() {
 		return self.olMap;
 	}
@@ -69,6 +80,10 @@ var mapControlVariablesModule = function() {
 		setOlMap : setOlMap,
 		getZoomLevel : getZoomLevel,
 		setZoomLevel : setZoomLevel,
+		setGoogleLayer : setGoogleLayer,
+		getGoogleLayer : getGoogleLayer,
+		getOsmLayer : getOsmLayer,
+		setOsmLayer : setOsmLayer,
 		getCenter : getCenter,
 		setCenter : setCenter,
 		getFpControl : getFpControl,
@@ -97,55 +112,54 @@ var mapControlModule = function() {
 	var heatMapInterval;
 	var animatedMapInterval;
 
-	var openLayersView = null;
-	var googleMapDiv = null;
-	var googleMapOptions = {
-		disableDefaultUI : true,
-		keyboardShortcuts : false,
-		draggable : false,
-		disableDoubleClickZoom : true,
-		scrollwheel : false,
-		streetViewControl : false,
-	};
-
 	// ----------------------- Map Initialization -------------------- //
 	function init() {
+		setMapHeight();
 		// open layer view is the map used to draw our points and polygons
 		openLayersView = new ol.View({
+			center : ol.proj.transform([ 35, 33 ], 'EPSG:4326', 'EPSG:3857'),
+			zoom : 8,
 			// Do NOT go beyond the 22 zoom levels of Google Maps
 			maxZoom : maxZoom,
 			minZoom : minZoom
 		});
+		var googleLayer = new olgm.layer.Google();
+		var osmLayer = new ol.layer.Tile({
+			source : new ol.source.OSM(),
+			visible : false
+		});
+		mapControlVariablesModule.setGoogleLayer(googleLayer);
+		mapControlVariablesModule.setOsmLayer(osmLayer);
 
 		// Initialize open layer map
-		openLayersMapDiv = document.getElementById('openLayersMap');
 		var map = new ol.Map({
-			funct : ol.control.defaults({
-				attribution : false
-			}).extend([ new ol.control.ScaleLine({
-				unit : 'degrees',
-			}) ]),
-			interactions : ol.interaction.defaults({
-				altShiftDragRotate : false,
-				dragPan : false,
-				rotate : false,
-				pinchRotate : false,
-				mouseWheelZoom : false,
-				pinchZoom : true
-			}).extend([ new ol.interaction.DragPan({
-				kinetic : null
-			}) ]),
-			target : openLayersMapDiv,
+			// use OL3-Google-Maps recommended default interactions
+			interactions : olgm.interaction.defaults(),
+			controls : ol.control.defaults().extend(
+					[ new ol.control.ZoomSlider() ]),
+			layers : [ googleLayer, osmLayer ],
+			target : 'map',
 			view : openLayersView
 		});
+
 		mapControlVariablesModule.setOlMap(map);
+		var olGM = new olgm.OLGoogleMaps({
+
+			map : map,
+			mapIconOptions : {
+				useCanvas : false
+			}
+		}); // map is the ol.Map instance
+
+		olGM.activate();
 		eventMapControlModule.init();
 		initLandmarkLayer();
 		initUsersLayer();
-//		createFeaturesForTest();
-		googleMapModule.init('googleMap', 'openLayersMap', openLayersView,
-				olMap, setMapHeight);
 		userModule.init();
+	}
+	function toggle() {
+		googleLayer.setVisible(!googleLayer.getVisible());
+		osmLayer.setVisible(!osmLayer.getVisible());
 	}
 
 	function setMapZoomAndCenter() {
@@ -170,6 +184,14 @@ var mapControlModule = function() {
 			openLayersView.setZoom(minZoom);
 		}
 	}
+	function setMapHeight() {
+		var footerHeight = $("#footer").height();
+		var mapHeight = $(window).height() - 110;
+		// var mapWidth = $(window).width();
+
+		$("#map").height(mapHeight);
+
+	}
 
 	// ------------------End Map Initialization -------------------- //
 
@@ -177,11 +199,12 @@ var mapControlModule = function() {
 	function initLandmarkLayer() {
 
 		var source = new ol.source.Vector({
-		//	wrapX : false
+			wrapX : false
 		});
 
 		var vectorlayer = new ol.layer.Vector({
 			source : source,
+
 		});
 
 		mapControlVariablesModule.setLandmarkSource(source);
@@ -189,20 +212,20 @@ var mapControlModule = function() {
 		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
 
 	}
-	
+
 	function initUsersLayer() {
-		
+
 		var source = new ol.source.Vector({
 			wrapX : false
 		});
-		
+
 		var vectorlayer = new ol.layer.Vector({
 			source : source,
 		});
-		
+
 		mapControlVariablesModule.setUsersLayer(vectorlayer);
 		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
-		
+
 	}
 
 	// ------------------End Layers Initializations------------------//
@@ -218,18 +241,6 @@ var mapControlModule = function() {
 	// ---------------- End Map Utilities --------------------------- //
 
 	// --------------------- page functions --------------- //
-	function setMapHeight() {
-		var mapOffset = $("#googleMap").offset();
-		//$(".main-header").outerHeight();
-		var mapHeight = $(window).height() - mapOffset.top;
-		var mapWidth = $(window).width() - mapOffset.left;
-		 
-		 $("#map").height(mapHeight);
-		 $("#googleMap").height(mapHeight);
-		 $("#openLayersMap").height(mapHeight);
-		
-
-	}
 
 	function scrollToMap() {
 		var headerHeight = $("#googleMap").offset().top;
@@ -238,11 +249,7 @@ var mapControlModule = function() {
 		}, 1000);
 	}
 
-	// --------------- END page sunctions ------------ //
-
-
-	
-	/***
+	/***************************************************************************
 	 * @param x
 	 * @param y
 	 * @param style
@@ -295,19 +302,20 @@ var mapControlModule = function() {
     }
 	
 	function refreshMapLayers() {
-		mapControlVariablesModule.getOlMap().getLayers().forEach(
-				function(e) {
-					if (e.getSource().updateParams) {
-						e.getSource().updateParams({
-							time_ : (new Date()).getTime()
-						});
-					}
+		mapControlVariablesModule.getOlMap().getLayers().forEach(function(e) {
+			if (e.getSource().updateParams) {
+				e.getSource().updateParams({
+					time_ : (new Date()).getTime()
 				});
+			}
+		});
 	}
 	
-	function zoomToLocation(x,  y){
+	function zoomToFeature(feature){
+		var map = mapControlVariablesModule.getOlMap();
+		var view = map.getView();
 		if(x!=undefined && y!=undefined)
-			mapControlVariablesModule.getOlMap().getView().setCenter([x,y]);
+			view.fit(feature.getGeom, map.getSize());
 	}
 	
 	function getFeatureByCoordinates(layer, x, y){
@@ -320,15 +328,15 @@ var mapControlModule = function() {
 		}
 	}
 	
+	
+	
 	function animateFeature(feature){
 		var interval = window.setInterval(function(){
 		    animate(feature);
 		},80);
-
 	}
 	
-	function animate(feature)
-	{
+	function animate(feature){
 		if(feature.data == undefined || feature.data.size == undefined)
 			feature.data = {size: 10};
 		
@@ -350,6 +358,11 @@ var mapControlModule = function() {
 	        window.clearInterval(interval);
 	    }
 	}
+	
+	function zoomToLocation(x, y){
+		if(x == undefined || y == undefined) return;
+		mapControlVariablesModule.getOlMap().getView().setCenter(ol.proj.transform([x, y], 'EPSG:4326', 'EPSG:3857'));
+	}
 
 	return {
 		init : init,
@@ -357,10 +370,10 @@ var mapControlModule = function() {
 		setMapZoomAndCenter : setMapZoomAndCenter,
 		addPointToLayer: addPointToLayer,
 		refreshMapLayers: refreshMapLayers,
-		computeFeatureStyle: computeFeatureStyle,	
-		zoomToLocation: zoomToLocation,
+		computeFeatureStyle: computeFeatureStyle,
 		getFeatureByCoordinates: getFeatureByCoordinates,
-		animateFeature: animateFeature
+		animateFeature: animateFeature,
+		zoomToLocation: zoomToLocation
 	}
 	
 }();
