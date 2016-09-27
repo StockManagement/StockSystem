@@ -153,11 +153,11 @@ var mapControlModule = function() {
 		eventMapControlModule.init();
 		initLandmarkLayer();
 		initUsersLayer();
-
+		//showOsmLayer();
 	}
-	function toggle() {
-		googleLayer.setVisible(!googleLayer.getVisible());
-		osmLayer.setVisible(!osmLayer.getVisible());
+	function showOsmLayer() {
+		googleLayer.setVisible(false);
+		osmLayer.setVisible(true);
 	}
 
 	function setMapZoomAndCenter() {
