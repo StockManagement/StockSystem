@@ -9,6 +9,8 @@ function testAddPointToLayer(){
 	var landmarkLayer = mapControlVariablesModule.getLandmarkLayer();
 	mapControlModule.addPointToLayer(landmarkLayer, -10, -25, style);
 }
+
+
 // ------------------ END testing mapControl.js ------------------ //
 
 // -------------------- testing styler.js ------------------------ //

@@ -4,215 +4,221 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-	<h:outputStylesheet library="css/map/user" name="user.css" />
-	
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
+<h:outputStylesheet library="css/map/user" name="user.css" />
 
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-map"></i></a></li>
-      <li><a href="#control-sidebar-users-tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-     
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading "> Landmarks</h3>
-        <ul class="control-sidebar-menu " >
-    
-          <li>
-            <a id="a-Addlandmark" href="javascript:void(0)" onclick="landmarkControl.addLandmarkOnClick();">
-        <!--       <i class="menu-icon:hover fa fa-birthday-cake bg-red"></i> -->
-				<i id="iconAddlandmark" class="menu-icon fa fa-map-marker bg-green"></i>
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Add Landmark</h4>
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark"> <!-- Create the tabs -->
+<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+	<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i
+			class="fa fa-map"></i></a></li>
+	<li><a href="#control-sidebar-users-tab" data-toggle="tab"><i
+			class="fa fa-user"></i></a></li>
+	<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
+			class="fa fa-gears"></i></a></li>
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
 
-                <p>Click on the map to add new landmark</p>
-              </div>
-            </a>
-          </li>
-         
-         
-        </ul>
-        <!-- /.control-sidebar-menu -->
+	<!-- Home tab content -->
+	<div class="tab-pane active" id="control-sidebar-home-tab">
+		<h3 class="control-sidebar-heading ">Landmarks</h3>
+		<ul class="control-sidebar-menu ">
 
-        <h3 class="control-sidebar-heading">landmarks</h3>
-        <div  class="sidebar">
-        <div class="input-group">
-          <input type="text" name="search" class="form-control" placeholder="Search..."></input>
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="searchLandmark-btn" class="btn btn-flat btn-warning "><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </div>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
+			<li><a id="a-Addlandmark" href="javascript:void(0)"
+				onclick="landmarkControl.addLandmarkOnClick();"> <!--       <i class="menu-icon:hover fa fa-birthday-cake bg-red"></i> -->
+					<i id="iconAddlandmark" class="menu-icon fa fa-map-marker bg-green"></i>
+					<div class="menu-info">
+						<h4 class="control-sidebar-subheading">Add Landmark</h4>
+						<p>Click on the map to add new landmark</p>
+					</div>
+			</a></li>
+			
+		</ul>
+		<!-- /.control-sidebar-menu -->
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
+		<h3 class="control-sidebar-heading">landmarks</h3>
+		<div class="sidebar">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control"
+					placeholder="Search..."></input> <span class="input-group-btn">
+					<button type="submit" name="search" id="searchLandmark-btn"
+						class="btn btn-flat btn-warning ">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<ul class="control-sidebar-menu">
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Custom Template Design <span class="label label-danger pull-right">70%</span>
+					</h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+					</div>
+			</a></li>
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Update Resume <span class="label label-success pull-right">95%</span>
+					</h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-success" style="width: 95%"></div>
+					</div>
+			</a></li>
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Laravel Integration <span class="label label-warning pull-right">50%</span>
+					</h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+					</div>
+			</a></li>
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Back End Framework <span class="label label-primary pull-right">68%</span>
+					</h4>
 
-      </div>
-      <!-- END Home tab-pane -->
-      
-      
-      <!-- Users tab content -->
-      <div class="tab-pane" id="control-sidebar-users-tab">
-        <h3 class="control-sidebar-heading">Users</h3>
-        <div  class="sidebar">
-        <div class="input-group">
-          <input type="text" name="search" class="form-control" placeholder="Search..."></input>
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="searchLandmark-btn" class="btn btn-flat btn-success "><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </div>
-        <ul class="control-sidebar-menu">
-          <li>
-            <div class="widget widget-shadow">
-                    <div class="widget-content text-center bg-white padding-20 btn-success ">
-                      <a href="#" class="avatar margin-bottom-5">
-                        <img class="img-responsive float-right user-image" src= "../../resources/img/user2-160x160.jpg" alt="Viola_photo" />
-                      </a>
-                      <div class="user-name">Viola</div>
-                      <div class="friend-title margin-bottom-20 blue-grey-400">
-                        Hi~ I'm Viola.
-                      </div>
-                    </div>
-                  </div>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+					</div>
+			</a></li>
+		</ul>
+		<!-- /.control-sidebar-menu -->
 
-      </div>
-      <!-- END Users tab-pane -->
-      
-      
-      
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
+	</div>
+	<!-- END Home tab-pane -->
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right checked" ></input>
-            </label>
 
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
+	<!-- Users tab content -->
+	<div class="tab-pane" id="control-sidebar-users-tab">
+		<h3 class="control-sidebar-heading">Users</h3>
+		<div class="sidebar">
+			<ul class="control-sidebar-menu ">
+				<li><a id="a-Addlandmark" href="javascript:void(0)"
+					onclick="landmarkControl.addLandmarkOnClick();"> <!--       <i class="menu-icon:hover fa fa-birthday-cake bg-red"></i> -->
+						<i id="iconAddUser" class="menu-icon fa fa-map-marker bg-green"></i>
+						<div class="menu-info">
+							<h4 class="control-sidebar-subheading">Add User</h4>
+							<p>Click on the map to add new user</p>
+						</div>
+				</a></li>	
+			</ul>
+		</div>
+		
+		<h3 class="control-sidebar-heading">users</h3>
+		<!-- user search box -->
+		<div class="sidebar">
+			<form class="ui-filterable">
+				<div class="input-group">
+						<input type="text" name="search" class="form-control"
+							placeholder="find user..." id="myFilter"> </input> <span class="input-group-btn">
+							<button type="submit" name="search" id="searchLandmark-btn"
+								class="btn btn-flat btn-success ">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+				</div>
+			</form>
+		</div>
+			
+		<ul class="control-sidebar-menu"
+		 	data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true">
+			<ui:repeat var="user" value="#{mapControl.users}">
+				<c:set var="v_onClick" value="#{user.x} ne null? mapControlModule.zoomToLocation(#{user.x},#{user.y}): ''"></c:set>
+				<li>
+					<div class="widget widget-shadow padding-2">
+						<div class="widget-content text-center bg-white  btn-success ">
+							<a href="#" class="avatar margin-bottom-5">
+								 <img class="float-left"
+										src="../../resources/img/user2-160x160.jpg" alt="Viola_photo" />
+								<span class="color-white">
+									#{user.iduser} <br />
+									#{user.userName} <br />
+								</span>
+								<h:panelGroup rendered="#{user.x ne null}">
+									<button title="view on map" class="btn btn-success float-right border-radius" onclick="mapControlModule.zoomToLocation(#{user.x},#{user.y})"><i class="fa fa-eye"></i></button>
+								</h:panelGroup>
+							</a>
+						</div>
+					</div>
+				</li>
+			</ui:repeat>
+		</ul>
+		<!-- /.control-sidebar-menu -->
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right checked" ></input>
-            </label>
+	</div>
+	<!-- END Users tab-pane -->
 
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right checked" ></input>
-            </label>
 
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
+	<!-- Settings tab content -->
+	<div class="tab-pane" id="control-sidebar-settings-tab">
+		<form method="post">
+			<h3 class="control-sidebar-heading">General Settings</h3>
 
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> Report panel
+					usage <input type="checkbox" class="pull-right checked"></input>
+				</label>
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right checked" ></input>
-            </label>
-          </div>
-          <!-- /.form-group -->
+				<p>Some information about this general settings option</p>
+			</div>
+			<!-- /.form-group -->
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right"></input>
-            </label>
-          </div>
-          <!-- /.form-group -->
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> Allow mail
+					redirect <input type="checkbox" class="pull-right checked"></input>
+				</label>
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
+				<p>Other sets of options are available</p>
+			</div>
+			<!-- /.form-group -->
+
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> Expose author
+					name in posts <input type="checkbox" class="pull-right checked"></input>
+				</label>
+
+				<p>Allow the user to show his name in blog posts</p>
+			</div>
+			<!-- /.form-group -->
+
+			<h3 class="control-sidebar-heading">Chat Settings</h3>
+
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> Show me as online
+					<input type="checkbox" class="pull-right checked"></input>
+				</label>
+			</div>
+			<!-- /.form-group -->
+
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> Turn off
+					notifications <input type="checkbox" class="pull-right"></input>
+				</label>
+			</div>
+			<!-- /.form-group -->
+
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> Delete chat
+					history <a href="javascript:void(0)" class="text-red pull-right"><i
+						class="fa fa-trash-o"></i></a>
+				</label>
+			</div>
+			<!-- /.form-group -->
+		</form>
+	</div>
+	<!-- /.tab-pane -->
+</div>
+</aside>
 
 <div class="control-sidebar-bg"></div>
+<h:outputScript library="js/shared" name="shared.js" />
 <h:outputScript library="js/template" name="aside-right-tracking.js" />
 </html>
