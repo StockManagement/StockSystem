@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `stock` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `stock`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
 --
--- Host: 52.27.246.251    Database: stock
+-- Host: 127.0.0.1    Database: stock
 -- ------------------------------------------------------
--- Server version	5.5.50-0ubuntu0.14.04.1
+-- Server version	5.7.13
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,8 +27,10 @@ CREATE TABLE `user` (
   `user_name` varchar(45) COLLATE utf8_bin NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `phone_number` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `description` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin',NULL,NULL);
+INSERT INTO `user` VALUES (1,'admin',NULL,NULL,NULL,NULL),(2,'samir',NULL,NULL,NULL,NULL),(3,'Mohamad',NULL,NULL,NULL,NULL),(4,'Ali',NULL,NULL,NULL,NULL),(5,'Sawsan',NULL,NULL,NULL,NULL),(6,'a',NULL,NULL,'a',NULL),(7,'b','2016-10-01 12:12:05','2016-10-01 12:12:05','b',NULL),(13,'new','2016-10-02 10:21:37','2016-10-02 10:21:37','123',NULL),(14,'no location','2016-10-02 10:23:24','2016-10-02 10:23:24','a',NULL),(15,'','2016-10-02 10:34:41','2016-10-02 10:34:41','',NULL),(16,'loc','2016-10-02 10:49:40','2016-10-02 10:49:40','71744566',NULL),(17,'jounieh','2016-10-02 13:53:18','2016-10-02 13:53:18','123456',NULL),(18,'beirut','2016-10-02 14:14:33','2016-10-02 14:14:33','71744566',NULL),(19,'joune','2016-10-02 14:16:08','2016-10-02 14:16:08','71744566',NULL),(20,'ali','2016-10-02 15:24:40','2016-10-02 15:24:40','03354146',NULL),(21,'ba','2016-10-02 15:31:48','2016-10-02 15:31:48','c',NULL),(22,'bird','2016-10-02 15:41:51','2016-10-02 15:41:51','12323',NULL),(23,'ALI','2016-10-03 10:58:34','2016-10-03 10:58:34','021372',NULL),(24,'a','2016-10-03 15:22:15','2016-10-03 15:22:15','b',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-23 11:42:59
+-- Dump completed on 2016-10-03 18:37:47
