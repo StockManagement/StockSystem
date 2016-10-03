@@ -138,17 +138,14 @@ var eventMapControlModule = function() {
 	}
 	
 	function onUserDrawEnd(evt) {
-		console.log(evt.feature);
-//		setFeatureStyle(evt.feature);
-		var styler = new stylerModule();
-		var imageOption = styler.default_image_options;
-		imageOption.src = $("#frm-add-new-client\\:addUser-selectedIcon").val() || styler.default_image_options.src;
-		var imageStyle = styler.createImage(imageOption);
-		var opt_options = {image: imageStyle };
-		var style = styler.createStyle(opt_options);
+		// get style from input
+		var src = $("#frm-add-new-client\\:addUser-selectedIcon").val();
+		var style = new stylerModule().createQuickImageStyle(src);
 		evt.feature.setStyle(style);
 		this.lastAddedFeature = evt.feature;
-		sharedModule.loadModal('#addUserModal','.modal-header' );
+		
+		// load modal
+		sharedModule.loadModal('#featureStyleModal','.modal-header' );
 		
 		mapControlVariablesModule.getOlMap().removeInteraction(draw);
 		// display popup on click
@@ -157,6 +154,8 @@ var eventMapControlModule = function() {
 		coordinates = ol.proj.transform(coordinates, 'EPSG:3857', 'EPSG:4326');
 		$("#frm-add-new-client\\:addUser-userPositionX").val(coordinates[0]);
 		$("#frm-add-new-client\\:addUser-userPositionY").val(coordinates[1]);
+		
+		userModule.onAddUserClick();
 	}
 	// ------End Map Interaction-------------
 	return {

@@ -41,6 +41,8 @@ public class editFeatureStyle {
 	public void init(){
 		path = Helper.getConfig("SymbolImagesPhysicalPath") ;
 		folders = Helper.recurseDir(path, "");
+		if(folders!=null && folders.size() > 0 && selectedSymbolType == null)
+			selectedSymbolType = folders.get(0); 
 		getIconPerType();
 	}
 	

@@ -46,8 +46,10 @@ public class Helper {
 				result = "";
 				list = file.list();
 				// recursive call
-				for (int i = 0; i < list.length; i++)
+				for (int i = 0; i < list.length; i++){
+					if(list[i].startsWith(".")) continue;
 					result = (result == "" ? "" : result + "|") + recurseInDirFrom(serverPath + list[i], "");
+				}
 			}
 			return result;
 		}

@@ -94,6 +94,7 @@ var userModule = function() {
 		var users = JSON.parse(usersStr);
 		var layer = mapControlVariablesModule.getLandmarkLayer();
 		addUsersToLayer(users, layer);
+		// show / hide add client form
 		onButtonAddUserClick();
 	}
 	
@@ -104,32 +105,24 @@ var userModule = function() {
 	
 	function onAddUserClick(){
 		if (!self.isActiveAddUser) {
-			activateAddUser();
+			self.isActiveAddUser = true;
+			$('#a-addUser').addClass("selected");
+			$('#iconAddUser').removeClass("bg-green");
+			$('#iconAddUser').addClass("bg-blue");
+			
+			var userLayer = mapControlVariablesModule.getUsersLayer();
+			var geometryType = eventMapControlModule.GEOMETRY_TYPE.POINT;
+			var drawEndCallback = 'onUserDrawEnd';
+			eventMapControlModule.addDrawInteraction(userLayer, geometryType, drawEndCallback);
 		} else {
-			deactivateAddUser();
+			self.isActiveAddUser = false;
+			$('#a-addUser').removeClass("selected");
+			$('#iconAddUser').removeClass("bg-blue");
+			$('#iconAddUser').addClass("bg-green");
+			eventMapControlModule.removeDrawInteraction();
 		}
 	}
 	
-	
-	function activateAddUser() {
-		self.isActiveAddUser = true;
-		$('#a-addUser').addClass("selected");
-		$('#iconAddUser').removeClass("bg-green");
-		$('#iconAddUser').addClass("bg-blue");
-		
-		var userLayer = mapControlVariablesModule.getUsersLayer();
-		var geometryType = eventMapControlModule.GEOMETRY_TYPE.POINT;
-		var drawEndCallback = 'onUserDrawEnd';
-		eventMapControlModule.addDrawInteraction(userLayer, geometryType, drawEndCallback);
-	}
-	
-	function deactivateAddUser() {
-		self.isActiveAddUser = false;
-		$('#a-addUser').removeClass("selected");
-		$('#iconAddUser').removeClass("bg-blue");
-		$('#iconAddUser').addClass("bg-green");
-		eventMapControlModule.removeDrawInteraction();
-	}
 	
 	function onButtonAddUserClick(){
 		$("#btn-add-new-client").click(function(){

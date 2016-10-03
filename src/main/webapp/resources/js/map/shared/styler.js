@@ -76,6 +76,18 @@ var stylerModule = function() {
 	        });
 	}
 	
+	/***
+	 * a quick method to create an image style using an image src
+	 * @param @optional src: image source 
+	 */
+	this.createQuickImageStyle = function(src){
+		var imageOption = this.default_image_options;
+		imageOption.src = $("#frm-add-new-client\\:addUser-selectedIcon").val() || this.default_image_options.src;
+		var imageStyle = this.createImage(imageOption);
+		var opt_options = {image: imageStyle };
+		return  this.createStyle(opt_options);	
+	}
+	
 	
 	/***
 	 * @opt_options: a json object
