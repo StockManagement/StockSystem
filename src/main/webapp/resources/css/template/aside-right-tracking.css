@@ -5,3 +5,9 @@
 .tab-content {
 	padding: 0px 15px !important;
 }
+
+.control-sidebar-bg, .control-sidebar{
+	width: 270px;
+	right: -270px;
+}
+

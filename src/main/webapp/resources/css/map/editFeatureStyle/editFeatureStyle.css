@@ -1,0 +1,31 @@
+.symbols-container{
+	padding: 10px 20px 0px 20px;
+	height: 400px;
+	background: white;
+}
+
+.symbols-container-title {
+	padding-bottom: 10px;
+    border-bottom: 1px solid;
+}
+
+.symbols-container-select-type {
+	
+}
+
+.symbols-container-symbols {
+	height: 150px;
+	overflow: scroll;
+}
+
+.symbols-container-symbols-ul {
+	list-style-type: none;
+	padding: 0px;
+}
+
+.ui-selectee{
+	float: left;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+}

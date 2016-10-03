@@ -27,7 +27,7 @@ var landmarkControl = function() {
 		$('#a-Addlandmark').addClass("selected");
 		$('#iconAddlandmark').removeClass("bg-green");
 		$('#iconAddlandmark').addClass("bg-blue");
-		eventMapControlModule.addDrawInteraction();
+		eventMapControlModule.addLandmarkDrawInteraction();
 
 	}
 	function deactivateAddLandmark() {
