@@ -95,7 +95,7 @@ var userModule = function() {
 		var layer = mapControlVariablesModule.getLandmarkLayer();
 		addUsersToLayer(users, layer);
 		// show / hide add client form
-		onButtonAddUserClick();
+		hideShowUserForm();
 		// when clicking add feature button  registerDropdownChangeEvent  
 		$("#a-addUser").click(function(){ 
 //			editFeatureStyleModule.onDrpChangeCallback= "userModule.registerSelectUserIcon";
@@ -130,8 +130,7 @@ var userModule = function() {
 	}
 	
 	// hide / show create client form	
-	function onButtonAddUserClick(){
-		$("#btn-add-new-client").click(function(){
+	function hideShowUserForm(){
 			if( $("#frm-add-new-client").hasClass("collapse in") ){
 				$("#frm-add-new-client").collapse('hide');
 				$(".user-search-title").addClass('border-top');
@@ -139,7 +138,6 @@ var userModule = function() {
 				$(".user-search-title").removeClass('border-top');
 				$("#frm-add-new-client").collapse('show');
 			}
-		});
 	}
 	
 	function registerSelectUserIcon(){
@@ -173,6 +171,7 @@ var userModule = function() {
 	
 	return {
 		defaultUser: defaultUser,
+		hideShowUserForm: hideShowUserForm,
 		createUserStyle: createUserStyle,
 		getUsers: getUsers,
 		isValidUser: isValidUser,

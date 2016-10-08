@@ -1,13 +1,10 @@
 package map.user;
-
 import java.time.LocalDateTime;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import com.google.gson.JsonObject;
 import utility.Communicator;
 import utility.Helper;
-
-
 
 @RequestScoped
 @ManagedBean(name="sidePanelUserControl")
@@ -56,6 +53,9 @@ public class sidePanelUserControl{
 	public void cancel(){
 		username = "";
 		phoneNumber = "";
+		selectedSymbol= "";
+		userPositionX= "";
+		userPositionY= "";
 	}
 	
 	public void save(){

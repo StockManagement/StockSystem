@@ -82,7 +82,7 @@ var stylerModule = function() {
 	 */
 	this.createQuickImageStyle = function(src){
 		var imageOption = this.default_image_options;
-		imageOption.src = $("#frm-add-new-client\\:addUser-selectedIcon").val() || this.default_image_options.src;
+		imageOption.src = src || this.default_image_options.src;
 		var imageStyle = this.createImage(imageOption);
 		var opt_options = {image: imageStyle };
 		return  this.createStyle(opt_options);	

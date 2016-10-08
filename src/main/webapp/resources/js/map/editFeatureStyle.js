@@ -1,5 +1,5 @@
 var editFeatureStyleModule = function() {
-	onDrpChangeCallback = "";
+	var onDrpChangeCallback = "";
 	
 	registerDropdownChangeEvent = function(){
 		if( this.onDrpChangeCallback != undefined && this.onDrpChangeCallback.length > 0){

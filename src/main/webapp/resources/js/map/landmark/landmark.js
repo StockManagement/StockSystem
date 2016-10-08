@@ -54,7 +54,7 @@ var landmarkModule = function() {
 		$(".symb").click(function(){
 //			var symbol = $(".btn.ui-selectee")[0].src;
 			var symbol = $(this)[0].src;
-			$("#frm-add-new-client\\:addUser-selectedIcon").val(symbol);
+			$("#frm-add-new-landmark\\:addLandmark-selectedIcon").val(symbol);
 			$(".ui-selectee").find('.btn-success').removeClass('btn-success');	
 			$(this).addClass('btn-success');
 			
