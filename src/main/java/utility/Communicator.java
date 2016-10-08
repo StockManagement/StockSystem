@@ -73,45 +73,44 @@ public class Communicator {
 	 *            is a json string that contains the plain text values this
 	 *            function do
 	 */
-	// public static void post(String urlString, String jsonStr) {
-	// try {
-	// JSONObject request = new JSONObject();
-	//
-	// // "http://localhost:8080/RESTfulExample/json/product/post"
-	// URL url = new URL(urlString);
-	// HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	// conn.setDoOutput(true);
-	// conn.setRequestMethod("POST");
-	// conn.setRequestProperty("Content-Type", "application/json");
-	// String input = request.toString(); // "{\"qty\":100,\"name\":\"iPad
-	// 4\"}";
-	//
-	// // craete outputStream
-	// OutputStream os = conn.getOutputStream();
-	// os.write(input.getBytes());
-	// os.flush();
-	//
-	// if (conn.getResponseCode() == 500) {
-	// throw new RuntimeException("Failed: error on server: 500");
-	// }
-	//
-	// if (conn.getResponseCode() != 200) {
-	// throw new RuntimeException("Failed : HTTP error code : " +
-	// conn.getResponseCode());
-	// }
-	// BufferedReader br = new BufferedReader(new
-	// InputStreamReader((conn.getInputStream())));
-	// String output;
-	// System.out.println("Output from Server .... \n");
-	// while ((output = br.readLine()) != null) {
-	// System.out.println(output);
-	// }
-	// conn.disconnect();
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
+	 public static void post(String urlString, String jsonStr) {
+	 try {
+	 
+	
+	 // "http://localhost:8080/RESTfulExample/json/product/post"
+	 URL url = new URL(urlString);
+	 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	 conn.setDoOutput(true);
+	 conn.setRequestMethod("POST");
+	 conn.setRequestProperty("Content-Type", "application/json");
+	 String input = jsonStr; //request.toString(); // "{\"qty\":100,\"name\":\"iPad4\"}";
+	
+	 // craete outputStream
+	 OutputStream os = conn.getOutputStream();
+	 os.write(input.getBytes());
+	 os.flush();
+	
+	 if (conn.getResponseCode() == 500) {
+	 throw new RuntimeException("Failed: error on server: 500");
+	 }
+	
+	 if (conn.getResponseCode() != 200) {
+	 throw new RuntimeException("Failed : HTTP error code : " +
+	 conn.getResponseCode());
+	 }
+	 BufferedReader br = new BufferedReader(new
+	 InputStreamReader((conn.getInputStream())));
+	 String output;
+	 System.out.println("Output from Server .... \n");
+	 while ((output = br.readLine()) != null) {
+	 System.out.println(output);
+	 }
+	 conn.disconnect();
+	
+	 } catch (Exception e) {
+	 e.printStackTrace();
+	 }
+	 }
 
 	public static void main(java.lang.String[] args) {
 		String usersRestUrl = Helper.getConfig("REST_USER_URL");

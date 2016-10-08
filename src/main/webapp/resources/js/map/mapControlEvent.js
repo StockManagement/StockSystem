@@ -1,5 +1,11 @@
 var eventMapControlModule = function() {
-
+	var lastAddedFeature;
+	var GEOMETRY_TYPE = {
+		  POINT : "Point", 
+		  LINE : "LineString", 
+		  POLYGON : "Polygon"
+	};
+	
 	var element = document.getElementById('popup');
 	var popup = new ol.Overlay({
 		element : element,
@@ -58,36 +64,26 @@ var eventMapControlModule = function() {
 	}
 
 	// ----map interaction ---------
-	function addDrawInteraction() {
+	function addLandmarkDrawInteraction() {
 		// var value = 'Polygon';
 		// var value = 'LineString';
 		var type = 'Point';
 		draw = new ol.interaction.Draw({
 			source : mapControlVariablesModule.getLandmarkSource(),
 			type : type,
-
 		});
+		
 		mapControlVariablesModule.getOlMap().unByKey(onMapClickEvent);
 		mapControlVariablesModule.getOlMap().addInteraction(draw);
 		// Add Event Ondraw End
 		draw.on('drawend', onDrawEnd, this);
-
 	}
+	
 	function onDrawEnd(evt) {
 		console.log(evt.feature);
 		setFeatureStyle(evt.feature);
-		// var parser = new ol.format.GeoJSON();
-		// var features = source.getFeatures();
-
-		// var featuresGeoJSON = parser.writeFeatures(features);
-		// $.ajax({
-		// url: '/features.geojson',
-		// type: 'POST',
-		// data: featuresGeoJSON
-		// }).then(function(response) {
-		// console.log(response);
-		// });
 	}
+	
 	function setFeatureStyle(feature) {
 
 		var iconStyle = new ol.style.Style(
@@ -113,11 +109,63 @@ var eventMapControlModule = function() {
 		// display popup on click
 		onMapClickEvent=mapControlVariablesModule.getOlMap().on('click', onMapClick);
 	}
+	
+	// -------------------------------------------------------------------------------------------------- //
+	// create by @mmonzer
+	/***
+	 * @param layer 
+	 * @param geometryType should be a GEOMETRY_TYPE
+	 * @param drawEndCallback
+	 */
+	function addDrawInteraction(layer, gometryType, drawEndCallback) {
+		if(layer == undefined || gometryType == undefined) {
+			console.log('layer or geometry is not defined')
+			return;
+		}
+		var type = gometryType;
+		var source = layer.getSource();
+		var map = mapControlVariablesModule.getOlMap();
+		
+		draw = new ol.interaction.Draw({
+			source : source,
+			type : type,
+		});
+		map.unByKey(onMapClickEvent);
+		map.addInteraction(draw);
+		// Add Event Ondraw End
+		var onDrawEnd = eval(drawEndCallback);
+		draw.on('drawend', onUserDrawEnd, this);
+	}
+	
+	function onUserDrawEnd(evt) {
+		// get style from input
+		var src = $("#frm-add-new-client\\:addUser-selectedIcon").val();
+		var style = new stylerModule().createQuickImageStyle(src);
+		evt.feature.setStyle(style);
+		this.lastAddedFeature = evt.feature;
+		
+		// load modal
+		sharedModule.loadModal('#featureStyleModal','.modal-header' );
+		
+		mapControlVariablesModule.getOlMap().removeInteraction(draw);
+		// display popup on click
+		onMapClickEvent=mapControlVariablesModule.getOlMap().on('click', onMapClick);
+		var coordinates = evt.feature.getGeometry().getCoordinates();
+		coordinates = ol.proj.transform(coordinates, 'EPSG:3857', 'EPSG:4326');
+		$("#frm-add-new-client\\:addUser-userPositionX").val(coordinates[0]);
+		$("#frm-add-new-client\\:addUser-userPositionY").val(coordinates[1]);
+		
+		userModule.onAddUserClick();
+	}
 	// ------End Map Interaction-------------
 	return {
 		init : init,
-		addDrawInteraction : addDrawInteraction,
+		addLandmarkDrawInteraction : addLandmarkDrawInteraction,
 		removeDrawInteraction : removeDrawInteraction,
+		GEOMETRY_TYPE: GEOMETRY_TYPE,
+		addDrawInteraction: addDrawInteraction,
+		onUserDrawEnd: onUserDrawEnd,
+		lastAddedFeature: lastAddedFeature
 	}
 
 }();

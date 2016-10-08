@@ -330,39 +330,45 @@ var mapControlModule = function() {
 	
 	
 	
-	function animateFeature(feature){
-		var interval = window.setInterval(function(){
-		    animate(feature);
-		},80);
-	}
-	
-	function animate(feature){
-		if(feature.data == undefined || feature.data.size == undefined)
-			feature.data = {size: 10};
-		
-	    feature.data.size += 1;
-
-	    feature.style = {
-	        pointRadius: feature.data.size,  // I will change only the size of the feature
-	        fillColor: "#ffcc66",
-	        fillOpacity: 0,
-	        strokeColor: "#ff9933",
-	        strokeWidth: 2,
-	        graphicZIndex: 1
-	    };
-
-	   feature.layer.redraw();
-
-	    if(feature.data.size == 30){
-	        console.info(interval);
-	        window.clearInterval(interval);
-	    }
-	}
+//	function animateFeature(layer, feature){
+//		var interval = window.setInterval(function(){
+//		    animate(layer, feature);
+//		},80);
+//	}
+//	
+//	function animate(layer, feature){
+//		if(feature.data == undefined || feature.data.size == undefined)
+//			feature.data = {size: 10};
+//		
+//	    feature.data.size += 1;
+//
+//	    feature.style = {
+//	        pointRadius: feature.data.size,  // I will change only the size of the feature
+//	        fillColor: "#ffcc66",
+//	        fillOpacity: 0,
+//	        strokeColor: "#ff9933",
+//	        strokeWidth: 2,
+//	        graphicZIndex: 1
+//	    };
+//
+//	   layer.getSource().dispatchEvent('change');
+//
+//	    if(feature.data.size == 30){
+//	        console.info(interval);
+//	        window.clearInterval(interval);
+//	    }
+//	}
 	
 	function zoomToLocation(x, y){
 		if(x == undefined || y == undefined) return;
 		mapControlVariablesModule.getOlMap().getView().setCenter(ol.proj.transform([x, y], 'EPSG:4326', 'EPSG:3857'));
 	}
+	
+	function onMapClick(layer, mapEventFunction, callback){
+		
+	}
+	
+
 
 	return {
 		init : init,
@@ -372,7 +378,6 @@ var mapControlModule = function() {
 		refreshMapLayers: refreshMapLayers,
 		computeFeatureStyle: computeFeatureStyle,
 		getFeatureByCoordinates: getFeatureByCoordinates,
-		animateFeature: animateFeature,
 		zoomToLocation: zoomToLocation
 	}
 	

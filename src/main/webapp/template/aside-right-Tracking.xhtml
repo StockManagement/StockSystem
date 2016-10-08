@@ -8,9 +8,10 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:outputStylesheet library="css/map/user" name="user.css" />
+<h:outputStylesheet library="css/map/editFeatureStyle" name="editFeatureStyle.css" />
 
 <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark"> <!-- Create the tabs -->
+<aside class="control-sidebar control-sidebar-dark control-sidebar-open"> <!-- Create the tabs -->
 <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
 	<li><a href="#control-sidebar-home-tab" data-toggle="tab"><i
 			class="fa fa-map"></i></a></li>
@@ -23,7 +24,7 @@
 <div class="tab-content">
 
 	<!-- Home tab content -->
-	<div class="tab-pane active" id="control-sidebar-home-tab">
+	<div class="tab-pane" id="control-sidebar-home-tab">
 		<h3 class="control-sidebar-heading ">Landmarks</h3>
 		<ul class="control-sidebar-menu ">
 
@@ -96,25 +97,12 @@
 
 
 	<!-- Users tab content -->
-	<div class="tab-pane" id="control-sidebar-users-tab">
-		<h3 class="control-sidebar-heading">Users</h3>
-		<div class="sidebar">
-			<ul class="control-sidebar-menu ">
-				<li><a id="a-Addlandmark" href="javascript:void(0)"
-					onclick="landmarkControl.addLandmarkOnClick();"> <!--       <i class="menu-icon:hover fa fa-birthday-cake bg-red"></i> -->
-						<i id="iconAddUser" class="menu-icon fa fa-map-marker bg-green"></i>
-						<div class="menu-info">
-							<h4 class="control-sidebar-subheading">Add User</h4>
-							<p>Click on the map to add new user</p>
-						</div>
-				</a></li>	
-			</ul>
-		</div>
+	<div class="tab-pane active" id="control-sidebar-users-tab">
+		<ui:include src="/pages/user/addUserControl.xhtml"></ui:include>
 		
-		<h3 class="control-sidebar-heading">users</h3>
+		<h3 class="control-sidebar-heading user-search-title border-top">users</h3>
 		<!-- user search box -->
 		<div class="sidebar">
-			<form class="ui-filterable">
 				<div class="input-group">
 						<input type="text" name="search" class="form-control"
 							placeholder="find user..." id="myFilter"> </input> <span class="input-group-btn">
@@ -124,10 +112,9 @@
 							</button>
 						</span>
 				</div>
-			</form>
 		</div>
 			
-		<ul class="control-sidebar-menu"
+		<ul class="control-sidebar-menu no-margin"
 		 	data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true">
 			<ui:repeat var="user" value="#{mapControl.users}">
 				<c:set var="v_onClick" value="#{user.x} ne null? mapControlModule.zoomToLocation(#{user.x},#{user.y}): ''"></c:set>
@@ -219,6 +206,8 @@
 </aside>
 
 <div class="control-sidebar-bg"></div>
-<h:outputScript library="js/shared" name="shared.js" />
 <h:outputScript library="js/template" name="aside-right-tracking.js" />
+<script>
+	sharedModule.createSearchFilter();
+</script>
 </html>

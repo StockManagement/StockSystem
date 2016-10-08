@@ -22,8 +22,8 @@ var stylerModule = function() {
 	}
 	
 	this.default_image_options = {
-			anchor: [0.5, 0.5],
-	        size: [52, 52],
+			anchor: [0.5, 46],
+		    size: [32, 48],
 	        offset: [52, 0],
 	        opacity: 1,
 	        scale: 0.25,
@@ -67,13 +67,25 @@ var stylerModule = function() {
 	 */
 	this.createImage = function (opt_options){
 		return new ol.style.Icon({
-	          anchor: opt_options.anchor || default_image_options.anchor,
-	          size: opt_options.size || default_image_options.size,
-	          offset: opt_options.offset || default_image_options.offset,
-	          opacity: opt_options.opacity || default_image_options.opacity,
-	          scale: opt_options.scale || default_image_options.scale,
-	          src: opt_options.src || default_image_options.src
+			    	anchor: opt_options.anchor || default_image_options.anchor,
+		        size: opt_options.size || default_image_options.size,
+		        anchorXUnits: 'pixels',
+		        anchorYUnits: 'pixels',
+		        opacity: opt_options.opacity || default_image_options.opacity,
+			    src: opt_options.src || default_image_options.src
 	        });
+	}
+	
+	/***
+	 * a quick method to create an image style using an image src
+	 * @param @optional src: image source 
+	 */
+	this.createQuickImageStyle = function(src){
+		var imageOption = this.default_image_options;
+		imageOption.src = $("#frm-add-new-client\\:addUser-selectedIcon").val() || this.default_image_options.src;
+		var imageStyle = this.createImage(imageOption);
+		var opt_options = {image: imageStyle };
+		return  this.createStyle(opt_options);	
 	}
 	
 	

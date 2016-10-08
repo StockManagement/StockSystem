@@ -14,6 +14,8 @@
 	<h:outputStylesheet library="css/map" name="ol3gm.css" />
 	<h:outputStylesheet library="css/map" name="ol.css" />
 	<h:outputStylesheet library="css/map" name="mapControl.css" />
+	<h:outputStylesheet library="css/map/featureanimation" name="featureanimation.css" />
+	
 	</ui:define>
 
 	<!-- page body -->
@@ -33,9 +35,27 @@
 		<h:outputScript library="js/map/shared" name="unitTest.js" />
 		<h:outputScript library="js/map" name="mapControlEvent.js" />	
 		<h:outputScript library="js/map" name="mapControl.js" />
+		<h:outputScript library="js/shared" name="shared.js" />
+		<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		
+		
+		<!-- map animation -->
+		<h:outputScript library="js/map/featureanimation" name="fadeanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="featureanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="nullanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="pathanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="shakeanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="showanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="slideanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="teleportanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="throwanimation.js" />
+		<h:outputScript library="js/map/featureanimation" name="zoomanimation.js" />
+			
 		
 		<!-- hidden inputs -->
 		<h:inputHidden id="usersHidden"  value="#{mapControl.usersJsonStr}"/>
+		 
+		 <ui:include src="addUserPopup.xhtml"></ui:include>
 		 
 	</section>
 	</ui:define>
