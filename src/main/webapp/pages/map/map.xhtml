@@ -32,9 +32,11 @@
 		<h:outputScript library="js/map" name="ol3gm.js" />		
 		<h:outputScript library="js/map/shared" name="styler.js" />
 		<h:outputScript library="js/map/user" name="user.js" />		
+		<h:outputScript library="js/map/landmark" name="landmark.js" />		
 		<h:outputScript library="js/map/shared" name="unitTest.js" />
 		<h:outputScript library="js/map" name="mapControlEvent.js" />	
 		<h:outputScript library="js/map" name="mapControl.js" />
+		<h:outputScript library="js/map" name="editFeatureStyle.js" />
 		<h:outputScript library="js/shared" name="shared.js" />
 		<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		
@@ -55,7 +57,7 @@
 		<!-- hidden inputs -->
 		<h:inputHidden id="usersHidden"  value="#{mapControl.usersJsonStr}"/>
 		 
-		 <ui:include src="addUserPopup.xhtml"></ui:include>
+		 <ui:include src="editFeatureStyle.xhtml"></ui:include>
 		 
 	</section>
 	</ui:define>

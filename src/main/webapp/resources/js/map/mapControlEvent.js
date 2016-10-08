@@ -40,7 +40,7 @@ var eventMapControlModule = function() {
 			$(element).popover({
 				'placement' : 'top',
 				'html' : true,
-				'content' : feature.attributes['name']
+//				'content' : feature.attributes['name']
 			});
 			$(element).popover('show');
 		} else {
@@ -155,7 +155,33 @@ var eventMapControlModule = function() {
 		$("#frm-add-new-client\\:addUser-userPositionX").val(coordinates[0]);
 		$("#frm-add-new-client\\:addUser-userPositionY").val(coordinates[1]);
 		
+		// add one point only
 		userModule.onAddUserClick();
+//		$(".symb").off('click');
+		editFeatureStyleModule.onDrpChangeCallback= "userModule.registerSelectUserIcon";
+	}
+	
+	function onLandmarkDrawEnd(evt) {
+		// get style from input
+		var src = $("#frm-add-landmark\\:addLandmark-selectedIcon").val();
+		var style = new stylerModule().createQuickImageStyle(src);
+		evt.feature.setStyle(style);
+		this.lastAddedFeature = evt.feature;
+		
+		// load modal
+		sharedModule.loadModal('#featureStyleModal','.modal-header' );
+		
+		mapControlVariablesModule.getOlMap().removeInteraction(draw);
+		// display popup on click
+		onMapClickEvent=mapControlVariablesModule.getOlMap().on('click', onMapClick);
+		var coordinates = evt.feature.getGeometry().getCoordinates();
+		coordinates = ol.proj.transform(coordinates, 'EPSG:3857', 'EPSG:4326');
+		$("#frm-add-landmark\\:addLandmark-userPositionX").val(coordinates[0]);
+		$("#frm-add-landmark\\:addLandmark-userPositionY").val(coordinates[1]);
+		
+		landmark.onAddLandmarkClick();
+//		$(".symb").off('click');
+		editFeatureStyleModule.onDrpChangeCallback = "landmarkModule.registerSelectLandmarkIcon";
 	}
 	// ------End Map Interaction-------------
 	return {

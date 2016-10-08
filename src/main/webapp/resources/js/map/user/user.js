@@ -96,6 +96,11 @@ var userModule = function() {
 		addUsersToLayer(users, layer);
 		// show / hide add client form
 		onButtonAddUserClick();
+		// when clicking add feature button  registerDropdownChangeEvent  
+		$("#a-addUser").click(function(){ 
+//			editFeatureStyleModule.onDrpChangeCallback= "userModule.registerSelectUserIcon";
+			editFeatureStyleModule.registerDropdownChangeEvent();
+		})
 	}
 	
 	function getFeatureByCoordinates(x, y){
@@ -114,6 +119,7 @@ var userModule = function() {
 			var geometryType = eventMapControlModule.GEOMETRY_TYPE.POINT;
 			var drawEndCallback = 'onUserDrawEnd';
 			eventMapControlModule.addDrawInteraction(userLayer, geometryType, drawEndCallback);
+			registerSelectUserIcon();
 		} else {
 			self.isActiveAddUser = false;
 			$('#a-addUser').removeClass("selected");
@@ -123,7 +129,7 @@ var userModule = function() {
 		}
 	}
 	
-	
+	// hide / show create client form	
 	function onButtonAddUserClick(){
 		$("#btn-add-new-client").click(function(){
 			if( $("#frm-add-new-client").hasClass("collapse in") ){

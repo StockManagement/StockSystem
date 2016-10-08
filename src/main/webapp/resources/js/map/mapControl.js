@@ -156,6 +156,7 @@ var mapControlModule = function() {
 		initLandmarkLayer();
 		initUsersLayer();
 		userModule.init();
+		landmarkModule.init();
 	}
 	function toggle() {
 		googleLayer.setVisible(!googleLayer.getVisible());
@@ -190,7 +191,10 @@ var mapControlModule = function() {
 		// var mapWidth = $(window).width();
 
 		$("#map").height(mapHeight);
-
+		
+		var height = $(document).height();
+		$(".tab-content").css("height", height - 110);
+		$(".control-sidebar-bg").css("height", height - 110);
 	}
 
 	// ------------------End Map Initialization -------------------- //
