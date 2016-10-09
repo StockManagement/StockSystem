@@ -28,7 +28,7 @@
 				<h3 class="box-title">Choose an icon for your client</h3>
 			</div>
 			<div class="box-body">
-			<h:form id="addUser-form">
+			<h:form class="editFeature-form">
 				<div class="form-group symbols-container-select-type">
 					<h:outputLabel value="select type" />
 					<h:selectOneMenu  styleClass="form-control" 
@@ -50,11 +50,12 @@
 					</ul>
 				</div>
 	              <script>
-					userModule.registerSelectUserIcon();
+					/* userModule.registerSelectUserIcon(); */
+					editFeatureStyleModule.registerDropdownChangeEvent();
 				</script>
 			</h:form>
 			<div class="box-footer">
-	                <button class="btn btn-primary"   onclick="sharedModule.closeModal('#featureStyleModal')">
+	                <button class="btn btn-primary"   onclick="editFeatureStyleModule.closeEditFeatureStyleModal()">
 	                		Submit
 	                </button>
 	              </div>
@@ -62,7 +63,6 @@
 			<ui:remove>
 				<!-- Tab panes -->
 				<div class="tab-content">
-
 					<!-- tab1 -->
 					<div class="tab-pane padding-20 active" id="popup-icon-tab1 ">
 						<img src="${resource['img/ckb-checked.png']}" class="icon-small"></img>

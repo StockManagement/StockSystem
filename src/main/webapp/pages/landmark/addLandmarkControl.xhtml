@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h3 class="control-sidebar-heading ">Add new landmarks</h3>
+	<h:form id="frm-add-new-landmark" class="add-user-box">
+		<div class="form-group">
+			<h:outputLabel for="txtNewLandmarkName" value="Landmark name" />
+			<h:inputText id="txtNewLandmarkName" placeholder="#{msg.newUserName}"
+				class="form-control" value="#{sidePanelLandmarkControl.name}" />
+		</div>
+		<div class="form-group">
+			<h:outputLabel for="txtLandmarkDescription" value="Landmark description" />
+			<h:inputText id="txtLandmarkDescription"
+				class="form-control" value="#{sidePanelLandmarkControl.description}" />
+		</div>
+
+		<div class="sidebar add-user-collapsable">
+			<ul class="control-sidebar-menu no-margin">
+				<li><a id="a-Addlandmark" href="javascript:void(0)"
+					onclick="landmarkModule.onAddLandmarkClick();"> <!--       <i class="menu-icon:hover fa fa-birthday-cake bg-red"></i> -->
+						<i id="iconAddlandmark"
+						class="menu-icon fa fa-map-marker bg-green"></i>
+						<div class="menu-info">
+							<h4 class="control-sidebar-subheading">Add Landmark</h4>
+							<p>Click on the map to add new landmark</p>
+						</div>
+				</a></li>
+			</ul>
+		</div>
+		<div class="box-footer background-transparent">
+			<h:commandButton action="#{sidePanelLandmarkControl.cancel}"
+				class="btn btn-default" value="cancel">
+				<f:ajax render="@form" />
+			</h:commandButton>
+			<h:commandButton action="#{sidePanelLandmarkControl.save}"
+				class="btn btn-primary pull-right" value="save">
+				<f:ajax render="@form" execute="@form" />
+			</h:commandButton>
+		</div>
+
+		<h:inputHidden id="addLandmark-selectedIcon" value="#{sidePanelLandmarkControl.selectedSymbol}" />
+		<h:inputHidden id="addLandmark-landmarkPositionX" value="#{sidePanelLandmarkControl.landmarkPositionX}" />
+		<h:inputHidden id="addLandmark-landmarkPositionY" value="#{sidePanelLandmarkControl.landmarkPositionY}" /> 
+			
+	
+	</h:form>
+	<!-- /.control-sidebar-menu -->
+
+<!-- 	<h3 class="control-sidebar-heading">landmarks</h3>
+	<div class="sidebar">
+		<div class="input-group">
+			<input type="text" name="search" class="form-control"
+				placeholder="Search..."></input> <span class="input-group-btn">
+				<button type="submit" name="search" id="searchLandmark-btn"
+					class="btn btn-flat btn-warning ">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div>
+	</div> -->
+
+
+
+	<ui:remove>
+		<ul class="control-sidebar-menu">
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Custom Template Design <span class="label label-danger pull-right">70%</span>
+					</h4>
+
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+					</div>
+			</a></li>
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Update Resume <span class="label label-success pull-right">95%</span>
+					</h4>
+
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-success" style="width: 95%"></div>
+					</div>
+			</a></li>
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Laravel Integration <span class="label label-warning pull-right">50%</span>
+					</h4>
+
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+					</div>
+			</a></li>
+			<li><a href="javascript:void(0)">
+					<h4 class="control-sidebar-subheading">
+						Back End Framework <span class="label label-primary pull-right">68%</span>
+					</h4>
+
+					<div class="progress progress-xxs">
+						<div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+					</div>
+			</a></li>
+		</ul>
+	</ui:remove>
+	<!-- /.control-sidebar-menu -->
+
+
+<!-- 	
+ 	</h:form> -->
+</html>

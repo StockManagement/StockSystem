@@ -56,8 +56,15 @@
 		
 		<!-- hidden inputs -->
 		<h:inputHidden id="usersHidden"  value="#{mapControl.usersJsonStr}"/>
+<<<<<<< HEAD
+	
+		  <ui:include src="addUserPopup.xhtml"></ui:include>
+	
+		
+=======
 		 
 		 <ui:include src="editFeatureStyle.xhtml"></ui:include>
+>>>>>>> 74b91518e760f8dabb45d0457b27cd69a2a3a6d3
 		 
 	</section>
 	</ui:define>

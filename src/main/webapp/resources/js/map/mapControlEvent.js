@@ -40,7 +40,7 @@ var eventMapControlModule = function() {
 			$(element).popover({
 				'placement' : 'top',
 				'html' : true,
-				'content' : feature.attributes['name']
+//				'content' : feature.attributes['name']
 			});
 			$(element).popover('show');
 		} else {
@@ -64,46 +64,47 @@ var eventMapControlModule = function() {
 	}
 
 	// ----map interaction ---------
-	function addLandmarkDrawInteraction() {
-		// var value = 'Polygon';
-		// var value = 'LineString';
-		var type = 'Point';
-		draw = new ol.interaction.Draw({
-			source : mapControlVariablesModule.getLandmarkSource(),
-			type : type,
-		});
-		
-		mapControlVariablesModule.getOlMap().unByKey(onMapClickEvent);
-		mapControlVariablesModule.getOlMap().addInteraction(draw);
-		// Add Event Ondraw End
-		draw.on('drawend', onDrawEnd, this);
-	}
-	
+//	function addLandmarkDrawInteraction() {
+//		// var value = 'Polygon';
+//		// var value = 'LineString';
+//		var type = 'Point';
+//		draw = new ol.interaction.Draw({
+//			source : mapControlVariablesModule.getLandmarkSource(),
+//			type : type,
+//		});
+//		
+//		mapControlVariablesModule.getOlMap().unByKey(onMapClickEvent);
+//		mapControlVariablesModule.getOlMap().addInteraction(draw);
+//		// Add Event Ondraw End
+//		draw.on('drawend', onDrawEnd, this);
+//	}
+//	
 	function onDrawEnd(evt) {
 		console.log(evt.feature);
 		setFeatureStyle(evt.feature);
 	}
+//	
+//	function setFeatureStyle(feature) {
+//
+//		var iconStyle = new ol.style.Style(
+//				{
+//					image : new ol.style.Icon(
+//							/** @type {olx.style.IconOptions} */
+//							({
+//								anchor : [ 0.5, 46 ],
+//								anchorXUnits : 'fraction',
+//								anchorYUnits : 'pixels',
+//								opacity : 0.75,
+//								src : 'http://localhost:8080/Stock/resources/img/landmarks/icon-gasstation.png'
+//							}))
+//				});
+//		feature.attributes = {
+//			"name" : "station1",
+//			"id" : "1"
+//		};
+//		feature.setStyle(iconStyle);
+//	}
 	
-	function setFeatureStyle(feature) {
-
-		var iconStyle = new ol.style.Style(
-				{
-					image : new ol.style.Icon(
-							/** @type {olx.style.IconOptions} */
-							({
-								anchor : [ 0.5, 46 ],
-								anchorXUnits : 'fraction',
-								anchorYUnits : 'pixels',
-								opacity : 0.75,
-								src : 'http://localhost:8080/Stock/resources/img/landmarks/icon-gasstation.png'
-							}))
-				});
-		feature.attributes = {
-			"name" : "station1",
-			"id" : "1"
-		};
-		feature.setStyle(iconStyle);
-	}
 	function removeDrawInteraction() {
 		mapControlVariablesModule.getOlMap().removeInteraction(draw);
 		// display popup on click
@@ -130,13 +131,26 @@ var eventMapControlModule = function() {
 			source : source,
 			type : type,
 		});
+		
+		// remote		
 		map.unByKey(onMapClickEvent);
 		map.addInteraction(draw);
+		
 		// Add Event Ondraw End
 		var onDrawEnd = eval(drawEndCallback);
-		draw.on('drawend', onUserDrawEnd, this);
+		draw.on('drawend', onDrawEnd, this);
 	}
 	
+	/***
+	 * 
+	 * @param evt
+	 * function called (by addDrawInteraction) when geometry is drawn on the map
+	 * @action1: get last added feature
+	 * @action2: load editFeatureStyle modal
+	 * @action3: remove map interaction
+	 * @action4: set added point coordinates in frm-add-new-client
+	 * @action5: set the function that should be called when clicking on editFeaturestyle icons or when changing dropDown Value
+	 */
 	function onUserDrawEnd(evt) {
 		// get style from input
 		var src = $("#frm-add-new-client\\:addUser-selectedIcon").val();
@@ -146,6 +160,8 @@ var eventMapControlModule = function() {
 		
 		// load modal
 		sharedModule.loadModal('#featureStyleModal','.modal-header' );
+		editFeatureStyleModule.onDrpChangeCallback= "userModule.registerSelectUserIcon";
+		editFeatureStyleModule.registerDropdownChangeEvent();
 		
 		mapControlVariablesModule.getOlMap().removeInteraction(draw);
 		// display popup on click
@@ -155,12 +171,36 @@ var eventMapControlModule = function() {
 		$("#frm-add-new-client\\:addUser-userPositionX").val(coordinates[0]);
 		$("#frm-add-new-client\\:addUser-userPositionY").val(coordinates[1]);
 		
+		// add one point only
 		userModule.onAddUserClick();
+	}
+	
+	function onLandmarkDrawEnd(evt) {
+		// get style from input
+		var src = $("#frm-add-landmark\\:addLandmark-selectedIcon").val();
+		var style = new stylerModule().createQuickImageStyle(src);
+		evt.feature.setStyle(style);
+		this.lastAddedFeature = evt.feature;
+		
+		// load modal
+		sharedModule.loadModal('#featureStyleModal','.modal-header' );
+		editFeatureStyleModule.onDrpChangeCallback = "landmarkModule.registerSelectLandmarkIcon";
+		editFeatureStyleModule.registerDropdownChangeEvent();
+		
+		mapControlVariablesModule.getOlMap().removeInteraction(draw);
+		// display popup on click
+		onMapClickEvent=mapControlVariablesModule.getOlMap().on('click', onMapClick);
+		var coordinates = evt.feature.getGeometry().getCoordinates();
+		coordinates = ol.proj.transform(coordinates, 'EPSG:3857', 'EPSG:4326');
+		$("#frm-add-new-landmark\\:addLandmark-landmarkPositionX").val(coordinates[0]);
+		$("#frm-add-new-landmark\\:addLandmark-landmarkPositionY").val(coordinates[1]);
+		
+		// off add landmark button
+		landmarkModule.onAddLandmarkClick();
 	}
 	// ------End Map Interaction-------------
 	return {
 		init : init,
-		addLandmarkDrawInteraction : addLandmarkDrawInteraction,
 		removeDrawInteraction : removeDrawInteraction,
 		GEOMETRY_TYPE: GEOMETRY_TYPE,
 		addDrawInteraction: addDrawInteraction,

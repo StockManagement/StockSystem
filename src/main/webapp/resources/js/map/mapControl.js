@@ -156,6 +156,7 @@ var mapControlModule = function() {
 		initLandmarkLayer();
 		initUsersLayer();
 		userModule.init();
+		landmarkModule.init();
 	}
 	function toggle() {
 		googleLayer.setVisible(!googleLayer.getVisible());
@@ -186,11 +187,15 @@ var mapControlModule = function() {
 	}
 	function setMapHeight() {
 		var footerHeight = $("#footer").height();
-		var mapHeight = $(window).height() - 110;
+		var mapHeight = $(window).height() - 120;
 		// var mapWidth = $(window).width();
 
 		$("#map").height(mapHeight);
-
+		
+		//var height = $(document).height();
+		//$(".tab-content").css("height", height - 110);
+		//$(".control-sidebar-bg").css("height", height - 110);
+		$(".user-list").css("height", mapHeight -190);
 	}
 
 	// ------------------End Map Initialization -------------------- //

@@ -9,5 +9,8 @@
 .other-lang{
 	height: 25px;
 }
+.capitalize{
+text-transform: uppercase;	
+}
 
 

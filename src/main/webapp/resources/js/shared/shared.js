@@ -29,10 +29,25 @@ var sharedModule = function() {
 		$(jModalSelector).modal('hide');
 	}
 	
+	function executeFunctionByName(functionName, context /*, args */) {
+		try{
+		    var args = Array.prototype.slice.call(arguments, 2);
+		    var namespaces = functionName.split(".");
+//		    var func = namespaces.pop();
+//		    for (var i = 0; i < namespaces.length; i++) {
+//		        context = context[namespaces[i]];
+//		    }
+		    window[namespaces[0]][namespaces[1]]();
+		} catch(e){
+			
+		}
+	}
+	
 	return{
 		createSearchFilter: createSearchFilter,
 		loadModal: loadModal,
-		closeModal: closeModal
+		closeModal: closeModal,
+		executeFunctionByName: executeFunctionByName
 	}
 	
 }();
