@@ -1,56 +1,66 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-      
-     
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
 <h:head>
-  <title><ui:insert name="title">Default title</ui:insert></title>
-  <h:outputStylesheet library="css/shared" name="font-awesome.min.css"/>
-  <h:outputStylesheet library="css/shared" name="font-JFFlatRegular.css"/>
-  <h:outputStylesheet library="webjars/bootstrap/3.2.0/css" name="bootstrap.min.css"/>
-  <h:outputStylesheet library="css/template" name="header.css"/>
-   <h:outputStylesheet library="css/shared" name="shared.css"/>
-  <h:outputStylesheet rendered="#{language.locale eq 'ar'}" library="css/adminLTE" name="AdminLTE-ar.css"/>
-  <h:outputStylesheet rendered="#{language.locale ne 'ar'}" library="css/adminLTE" name="AdminLTE.css"/>
-  <h:outputStylesheet library="css/adminLTE/skins" name="skin-blue.min.css"/>
-  <h:outputStylesheet library="css/template" name="aside-right-tracking.css"/>
-  <ui:insert name="css"/>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+	<h:outputStylesheet library="css/shared" name="font-awesome.min.css" />
+	<h:outputStylesheet library="css/shared" name="font-JFFlatRegular.css" />
+	<h:outputStylesheet library="webjars/bootstrap/3.2.0/css"
+		name="bootstrap.min.css" />
+	<h:outputStylesheet library="css/template" name="header.css" />
+	<h:outputStylesheet library="css/shared" name="shared.css" />
+	<h:outputStylesheet rendered="#{language.locale eq 'ar'}"
+		library="css/adminLTE" name="AdminLTE-ar.css" />
+	<h:outputStylesheet rendered="#{language.locale ne 'ar'}"
+		library="css/adminLTE" name="AdminLTE.css" />
+	<h:outputStylesheet library="css/adminLTE/skins"
+		name="skin-blue.min.css" />
+	<h:outputStylesheet library="css/template"
+		name="aside-right-tracking.css" />
+	<ui:insert name="css" />
 </h:head>
 
- 
+
 <h:body styleClass="skin-blue sidebar-mini sidebar-collapse">
-	
-	<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
-	<div class="wrapper">
-		
-	</div>
-	    <ui:insert name="header">
-	    	<ui:include src="header.xhtml"/>
-	    	<ui:include src="aside-left.xhtml"/>
-	    </ui:insert>
-	
-	
+
+	<ui:debug hotkey="x"
+		rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}" />
+	<div class="wrapper"></div>
+	<ui:insert name="header">
+		<ui:include src="header.xhtml" />
+		<ui:include src="aside-left.xhtml" />
+	</ui:insert>
+
+
 	<div id="content" class="content-wrapper">
-	  <ui:insert name="content">
-	  
-	  </ui:insert>
-	  
+		<ui:insert name="content">
+
+		</ui:insert>
+
 	</div>
-	
+
 	<div id="footer" class="main-footer">
 
-	  <ui:insert name="footer">
-			<ui:include src="footer.xhtml"/> 
-			<ui:include src="aside-right-Tracking.xhtml"/> 
-	  </ui:insert>
+		<ui:insert name="footer">
+			<ui:include src="footer.xhtml" />
+			<ui:include src="aside-right-Tracking.xhtml" />
+		</ui:insert>
 	</div>
-	
+
 	<h:outputScript library="js/jquery" name="jquery-2.1.1.min.js" />
-	<h:outputScript library="webjars/bootstrap/3.2.0/js" name="bootstrap.min.js"/>
+	<h:outputScript library="webjars/bootstrap/3.2.0/js"
+		name="bootstrap.min.js" />
 	<h:outputScript library="js/adminLTE" name="app.js" />
+	<h:outputScript library="js/shared" name="global.js" />
+	<script type="text/javascript">
+		// Set variable  move page components based on user is log in or not
+		globalModule.setDefaultServerPath("#{mapControl.defaultServerPath}");
+	</script>
 </h:body>
 
 </html>

@@ -42,6 +42,7 @@ public class Communicator {
 			// create rest connection
 			URL url = new URL(restBaseUrl + urlString);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setUseCaches(false);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", type);
 

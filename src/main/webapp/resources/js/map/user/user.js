@@ -66,12 +66,14 @@ var userModule = function() {
 		if(user.style == 'undefined' || user.style == null) {
 			var pointOption = styler.default_image_options;
 			if(user.img != undefined && user.img.length > 0)
-				pointOption.src = user.img;
+				pointOption.src =globalModule.getDefaultServerPath()+ user.img;
 			var pointStyle = styler.createImage(pointOption);
 			var opt_options = {image: pointStyle};
 			var style = styler.createStyle(opt_options); 
 			user.style = style;
 		}
+		
+		
 		mapControlModule.addPointToLayer(usersLayer, user.x, user.y, user.style);
 	}
 	

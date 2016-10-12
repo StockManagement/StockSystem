@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
-
+      
+     
 <h:head>
   <title><ui:insert name="title">Default title</ui:insert></title>
   <h:outputStylesheet library="css/shared" name="font-awesome.min.css"/>
@@ -33,19 +34,19 @@
 	
 	<div id="content" class="content-wrapper">
 	  <ui:insert name="content">
-	  	<h:form>
-	  		<h:commandLink action="#{language.change('en')}" value="English" /><br />
-	  		<h:commandLink action="#{language.change('fr')}" value="French" /><br />
-	  		<h:commandLink action="#{language.change('ar')}" value="Arabic" /><br />
-	  	</h:form>
-	    <h:outputText value="#{msg.hello}" />
-
+	  
 	  </ui:insert>
+	 
+			
+
+	  
 	</div>
 	
 	<div id="footer" class="main-footer">
+
 	  <ui:insert name="footer">
 			<ui:include src="footer.xhtml"/> 
+			<ui:include src="aside-right.xhtml"/> 
 	  </ui:insert>
 	</div>
 	

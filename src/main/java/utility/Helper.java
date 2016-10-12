@@ -1,6 +1,7 @@
 package utility;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -16,10 +17,11 @@ public class Helper {
 	public static String getConfig(String key) {
 		try {
 			Properties prop = new Properties();
+                     
 			String propFile = "../config/config.properties";
-
 			InputStream inputStream = Helper.class.getResourceAsStream(propFile);
-			prop.load(inputStream);
+			
+                        prop.load(inputStream);
 			if (inputStream == null) {
 				return key;
 			}

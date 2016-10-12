@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+<composite:interface>
+	<composite:attribute name="title" />
+	<composite:attribute name="imgDefault" />
+	<composite:attribute name="dataSourceUsers" />
+
+</composite:interface>
+
+<composite:implementation>
+	<!-- search & list of users -->
+	<h:form>
+		<h3 class="control-sidebar-heading user-search-title border-top">#{cc.attrs.title}
+		</h3>
+		<!-- user search box -->
+		<div class="sidebar">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control"
+					placeholder="find user..." id="myFilter"> </input> <span
+					class="input-group-btn">
+					<button type="submit" name="search" id="searchLandmark-btn"
+						class="btn btn-flat btn-success ">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="user-list">
+			<ul class="control-sidebar-menu no-margin" data-role="listview"
+				data-filter="true" data-input="#myFilter" data-autodividers="true"
+				data-inset="true">
+				<ui:repeat var="user" value="#{cc.attrs.dataSourceUsers}">
+					<c:set var="v_onClick"
+						value="#{user.x} ne null? mapControlModule.zoomToLocation(#{user.x},#{user.y}): ''"></c:set>
+					<li>
+						<div class="widget widget-shadow padding-2">
+							<div class="widget-content text-center bg-white userbox">
+
+								<div class="col-md-12">
+									<div class="col-md-4 padding-left-0">
+										<a href="#" class="avatar margin-bottom-5"> <img
+											class="float-left userImg"
+											src="#{user.img!= null ? mapControl.defaultServerPath.concat(user.img ): cc.attrs.imgDefault}" />
+										</a>
+									</div>
+									<div class="col-md-6">
+										<div>
+											<span class="color-white"> #{user.userName} </span>
+										</div>
+										<div>
+											<i class="fa fa-phone color-white"></i> <span
+												class="color-white">&nbsp; #{user.iduser}</span>
+										</div>
+
+
+									</div>
+									<div class="col-md-2">
+										<h:panelGroup rendered="#{user.x ne null}">
+											<a href="#"> <i class="fa fa-2x fa-eye"
+												onclick="mapControlModule.zoomToLocation(#{user.x},#{user.y})"></i>
+											</a>
+										</h:panelGroup>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</li>
+				</ui:repeat>
+			</ul>
+		</div>
+	</h:form>
+</composite:implementation>
+</html>

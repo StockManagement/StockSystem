@@ -6,8 +6,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
-
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:smartify="http://java.sun.com/jsf/composite/smartify">
 	<div>
 		<h3 class="control-sidebar-heading add-user-box-title">Create new client</h3>
 		<i id="btn-add-new-client" class="btn btn-danger fa fa-user-plus add-user-box-collapse-icon border-radius" onclick="userModule.hideShowUserForm()"/>
@@ -53,48 +53,10 @@
 		<h:inputHidden id="addUser-userPositionX"  value="#{sidePanelUserControl.userPositionX}"/>
 		<h:inputHidden id="addUser-userPositionY"  value="#{sidePanelUserControl.userPositionY}"/>
 	</h:form>
+	 <smartify:usersListComponent
+         title="Clients" 
+         dataSourceUsers="#{mapControl.clients}"
+         imgDefault="#{mapControl.imgDefaultClient}"/>
+    
 	
-	
-	
-	<!-- search & list of users -->
-	
-			<h3 class="control-sidebar-heading user-search-title border-top">users</h3>
-		<!-- user search box -->
-		<div class="sidebar">
-				<div class="input-group">
-						<input type="text" name="search" class="form-control"
-							placeholder="find user..." id="myFilter"> </input> <span class="input-group-btn">
-							<button type="submit" name="search" id="searchLandmark-btn"
-								class="btn btn-flat btn-success ">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
-				</div>
-		</div>
-			<div class="user-list">
-		<ul class="control-sidebar-menu no-margin"
-		 	data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true">
-			<ui:repeat var="user" value="#{mapControl.users}">
-				<c:set var="v_onClick" value="#{user.x} ne null? mapControlModule.zoomToLocation(#{user.x},#{user.y}): ''"></c:set>
-				<li>
-					<div class="widget widget-shadow padding-2">
-						<div class="widget-content text-center bg-white  btn-success ">
-							<a href="#" class="avatar margin-bottom-5">
-								 <img class="float-left"
-										src="../../resources/img/user2-160x160.jpg" alt="Viola_photo" />
-								<span class="color-white">
-									#{user.iduser} <br />
-									#{user.userName} <br />
-								</span>
-								<h:panelGroup rendered="#{user.x ne null}">
-									<button title="view on map" class="btn btn-success float-right border-radius" onclick="mapControlModule.zoomToLocation(#{user.x},#{user.y})"><i class="fa fa-eye"></i></button>
-								</h:panelGroup>
-							</a>
-						</div>
-					</div>
-				</li>
-			</ui:repeat>
-		</ul>
-		</div>
-		<!-- /.control-sidebar-menu -->
 </html>

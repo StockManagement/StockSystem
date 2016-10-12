@@ -22,12 +22,12 @@ var stylerModule = function() {
 	}
 
 	this.default_image_options = {
-		anchor : [ 0.5, 46 ],
-		size : [ 25, 25 ],
+		anchor : [ 0, 0 ],
+		size : [ 40, 50 ],
 		offset : [ 0, 0 ],
-		opacity : 1,
+		opacity : 2,
 		//scale : 0.25,
-		src : '../../resources/images/default-pin.png'
+		src : '../../resources/img/images/default-client.png' 
 	}
 
 	this.default_text_options = {
