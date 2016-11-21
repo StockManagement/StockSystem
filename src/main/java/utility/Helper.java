@@ -17,11 +17,11 @@ public class Helper {
 	public static String getConfig(String key) {
 		try {
 			Properties prop = new Properties();
-                     
-			String propFile = "../config/config.properties";
-			InputStream inputStream = Helper.class.getResourceAsStream(propFile);
-			
-                        prop.load(inputStream);
+                        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+                        String configFile = "config/config.properties";
+                        InputStream inputStream =classloader.getResourceAsStream(configFile);
+			//InputStream inputStream = Helper.class.getResourceAsStream(propFile);
+			prop.load(inputStream);
 			if (inputStream == null) {
 				return key;
 			}

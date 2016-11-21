@@ -11,7 +11,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 <composite:interface>
 	<composite:attribute name="title" />
-	<composite:attribute name="imgDefault" />
+       	<composite:attribute name="imgDefault" />
 	<composite:attribute name="dataSourceUsers" />
 
 </composite:interface>
@@ -19,13 +19,17 @@
 <composite:implementation>
 	<!-- search & list of users -->
 	<h:form>
+            <div> 
 		<h3 class="control-sidebar-heading user-search-title border-top">#{cc.attrs.title}
+                    <div class="float-right"><input type="checkbox" checked="true" onclick="userModule.toggle('#{cc.attrs.title}')"> View on map</input></div>
 		</h3>
+                
+                </div>
 		<!-- user search box -->
 		<div class="sidebar">
 			<div class="input-group">
 				<input type="text" name="search" class="form-control"
-					placeholder="find user..." id="myFilter"> </input> <span
+					placeholder="Find ..." id="myFilter"> </input> <span
 					class="input-group-btn">
 					<button type="submit" name="search" id="searchLandmark-btn"
 						class="btn btn-flat btn-success ">
@@ -58,7 +62,7 @@
 										</div>
 										<div>
 											<i class="fa fa-phone color-white"></i> <span
-												class="color-white">&nbsp; #{user.iduser}</span>
+												class="color-white">#{user.phoneNumber}</span>
 										</div>
 
 

@@ -9,6 +9,7 @@ var mapControlVariablesModule = function() {
 	var landmarkSource;
 	var landmarkLayer;
 	var usersLayer;
+        var clientsLayer;
 	var zoomLevel;
 	var center;
 
@@ -73,6 +74,13 @@ var mapControlVariablesModule = function() {
 	function setUsersLayer(usersLayer){
 		self.usersLayer = usersLayer;
 	}
+        function getClientsLayer(){
+		return self.clientsLayer;
+	}
+	function setClientsLayer(clientsLayer){
+		self.clientsLayer = clientsLayer;
+	}
+        
 	// --------------End getters and setters ------------- //
 
 	return {
@@ -94,6 +102,8 @@ var mapControlVariablesModule = function() {
 		setLandmarkLayer : setLandmarkLayer, 
 		getUsersLayer: getUsersLayer,
 		setUsersLayer: setUsersLayer,
+                getClientsLayer:getClientsLayer,
+                setClientsLayer:setClientsLayer,
 	}
 }();
 
@@ -155,6 +165,7 @@ var mapControlModule = function() {
 		eventMapControlModule.init();
 		initLandmarkLayer();
 		initUsersLayer();
+                initClientsLayer();
 		userModule.init();
 		landmarkModule.init();
 	}
@@ -233,6 +244,20 @@ var mapControlModule = function() {
 
 	}
 
+	function initClientsLayer() {
+
+		var source = new ol.source.Vector({
+			wrapX : false
+		});
+
+		var vectorlayer = new ol.layer.Vector({
+			source : source,
+		});
+
+		mapControlVariablesModule.setClientsLayer(vectorlayer);
+		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
+
+	}
 	// ------------------End Layers Initializations------------------//
 
 	// ---------------------- Map Utilities -------------------------- //

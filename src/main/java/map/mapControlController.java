@@ -19,6 +19,7 @@ public class mapControlController {
 	List<Map> clients;
 	List<Map> users;
 	String usersJsonStr;
+        String clientsJsonStr;
 	String defaultServerPath;
 	String imgDefaultClient;
 	String imgDefaultUser;
@@ -49,7 +50,14 @@ public class mapControlController {
 	public void setUsersJsonStr(String usersJsonStr) {
 		this.usersJsonStr = usersJsonStr;
 	}
-	
+	 public String getClientsJsonStr() {
+          return clientsJsonStr;
+         }
+
+         public void setClientsJsonStr(String clientsJsonStr) {
+         this.clientsJsonStr = clientsJsonStr;
+         }
+
 	public String getDefaultServerPath() {
 		String str = Helper.getConfig("DefaultServerPath");
 		return Helper.getConfig("DefaultServerPath");
@@ -67,22 +75,29 @@ public class mapControlController {
 	
 	@PostConstruct
 	void init() {
-		String usersRestUrl = Helper.getConfig("REST_USER_LOCATION_URL");
+            //Getusers
+                String usersRestUrl = Helper.getConfig("REST_USER_LOCATION_URL");
+            // used to Add users on the map
 		usersJsonStr = Communicator.get(usersRestUrl, "", Communicator.JSON);
-
-		Gson gson = new Gson();
-
-		clients = gson.fromJson(usersJsonStr, List.class);
+            //Getclients
+                String clientsRestUrl = Helper.getConfig("REST_CLIENT_LOCATION_URL");
+            // used to Add Clients on the map
+              clientsJsonStr = Communicator.get(clientsRestUrl, "", Communicator.JSON);
+                Gson gson = new Gson();
+		clients = gson.fromJson(clientsJsonStr, List.class);
 		users = gson.fromJson(usersJsonStr, List.class);
 	}
 
+        
+       
 	public static void main(String[] args) {
 		System.out.println("hello");
-		String usersJsonStr = Communicator.get("userlocations", "http://localhost:8081/stRestService/rest/",
+		String usersJsonStr = Communicator.get("userlocations", "http://localhost:8080/stRestService/rest/",
 				Communicator.JSON);
 
 		Gson gson = new Gson();
 		List<Map> users = gson.fromJson(usersJsonStr, List.class);
 	}
 
+   
 }

@@ -60,7 +60,7 @@ var userModule = function() {
 	// TODO: create a layer for users
 	var addUserToLayer = function(user, layer){
 		var styler = new stylerModule();
-		var usersLayer = mapControlVariablesModule.getUsersLayer();
+		//var usersLayer = mapControlVariablesModule.getUsersLayer();
 		if (!isValidUser(user) || layer== 'undefined') return;
 		// ensure user style not null
 		if(user.style == 'undefined' || user.style == null) {
@@ -74,7 +74,7 @@ var userModule = function() {
 		}
 		
 		
-		mapControlModule.addPointToLayer(usersLayer, user.x, user.y, user.style);
+		mapControlModule.addPointToLayer(layer, user.x, user.y, user.style);
 	}
 	
 	/***
@@ -92,10 +92,15 @@ var userModule = function() {
 	}
 	
 	var init = function(){
+          
 		var usersStr = $('#usersHidden').val();
 		var users = JSON.parse(usersStr);
-		var layer = mapControlVariablesModule.getLandmarkLayer();
-		addUsersToLayer(users, layer);
+                var clientsStr = $('#clientsHidden').val();
+		var clients = JSON.parse(clientsStr);
+		var userlayer = mapControlVariablesModule.getUsersLayer();
+                var clientstLayerlayer = mapControlVariablesModule.getClientsLayer();
+		addUsersToLayer(users, userlayer);
+                addUsersToLayer(clients, clientstLayerlayer);
 		// show / hide add client form
 		//hideShowUserForm();
 		// when clicking add feature button  registerDropdownChangeEvent  
@@ -171,6 +176,19 @@ var userModule = function() {
 		
 	}
 	
+        function toggle(title){
+           
+          if(title=="Users"){
+          var visibilityU= mapControlVariablesModule.getUsersLayer().getVisible();
+          mapControlVariablesModule.getUsersLayer().setVisible(!visibilityU); 
+          }
+          else if (title=="Clients"){
+          var visibilityC= mapControlVariablesModule.getClientsLayer().getVisible();
+          mapControlVariablesModule.getClientsLayer().setVisible(!visibilityC);    
+          }
+         
+        }
+        
 	return {
 		defaultUser: defaultUser,
 		hideShowUserForm: hideShowUserForm,
@@ -182,6 +200,7 @@ var userModule = function() {
 		init: init,
 		getFeatureByCoordinates: getFeatureByCoordinates,
 		onAddUserClick: onAddUserClick,
-		registerSelectUserIcon: registerSelectUserIcon
+		registerSelectUserIcon: registerSelectUserIcon,
+                toggle:toggle
 	}
 }();
