@@ -59,7 +59,7 @@ public class mapControlController {
          }
 
 	public String getDefaultServerPath() {
-		String str = Helper.getConfig("DefaultServerPath");
+		
 		return Helper.getConfig("DefaultServerPath");
 	}
 	public String getImgDefaultClient() {
@@ -68,6 +68,11 @@ public class mapControlController {
 	public String getImgDefaultUser() {
 		return Helper.getConfig("DefaultServerPath").concat("resources/img/images/default-user.png") ;
 	}
+        public String getUserTrackingRestUrl() {
+		
+	return Helper.getConfig("REST_SERVICE_BASE_URL").concat(Helper.getConfig("REST_USER_TRACKING"));
+	
+        }
 
 	// ------------------------ END getters and setters -----------------------
 	// //
@@ -86,8 +91,8 @@ public class mapControlController {
                 Gson gson = new Gson();
 		clients = gson.fromJson(clientsJsonStr, List.class);
 		users = gson.fromJson(usersJsonStr, List.class);
-	}
-
+            
+        }
         
        
 	public static void main(String[] args) {

@@ -68,10 +68,13 @@
 
 									</div>
 									<div class="col-md-2">
-										<h:panelGroup rendered="#{user.x ne null}">
+										<h:panelGroup rendered="#{user.x ne null}" class="float-left">
 											<a href="#"> <i class="fa fa-2x fa-eye"
 												onclick="mapControlModule.zoomToLocation(#{user.x},#{user.y})"></i>
 											</a>
+                                                                                    <h:panelGroup rendered="#{user.userTypeId==1}">
+                                                                                        <a href="#" class="float-right" > <i onclick="userModule.track('#{user.userId}')">Track</i></a>
+                                                                                 </h:panelGroup>
 										</h:panelGroup>
 									</div>
 								</div>

@@ -15,10 +15,10 @@ var stylerModule = function() {
 	});
 
 	this.default_point_options = {
-		radius : 30,
-		fillColor : 'rgba(200,150,200,0.5)',
-		strokeColor : 'rgba(120,30,100,0.8)',
-		strokeWidth : 3
+		radius : 5,
+		fillColor : 'rgba(0,255,0,0.9)',
+		strokeColor : 'rgba(236,136,0,1)',
+		strokeWidth : 2
 	}
 
 	this.default_image_options = {

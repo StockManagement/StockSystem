@@ -5,11 +5,15 @@ $(function() {
 var mapControlVariablesModule = function() {
 	var self = this;
 	var olMap;
+        var googleLayer;
+        var osmLayer;
 	var fpControl;
 	var landmarkSource;
 	var landmarkLayer;
 	var usersLayer;
         var clientsLayer;
+        var trackingLayer;
+        var trackingLinePathLayer;
 	var zoomLevel;
 	var center;
 
@@ -80,7 +84,18 @@ var mapControlVariablesModule = function() {
 	function setClientsLayer(clientsLayer){
 		self.clientsLayer = clientsLayer;
 	}
-        
+        function getTrackingLayer(){
+		return self.trackingLayer;
+	}
+	function setTrackingLayer(trackingLayer){
+		self.trackingLayer = trackingLayer;
+	}
+        function getTrackingLinePathLayer(){
+		return self.trackingLinePathLayer;
+	}
+	function setTrackingLinePathLayer(trackingLinePathLayer){
+		self.trackingLinePathLayer = trackingLinePathLayer;
+	}
 	// --------------End getters and setters ------------- //
 
 	return {
@@ -104,6 +119,10 @@ var mapControlVariablesModule = function() {
 		setUsersLayer: setUsersLayer,
                 getClientsLayer:getClientsLayer,
                 setClientsLayer:setClientsLayer,
+                setTrackingLayer:setTrackingLayer,
+                getTrackingLayer:getTrackingLayer,
+                getTrackingLinePathLayer:getTrackingLinePathLayer,
+                setTrackingLinePathLayer:setTrackingLinePathLayer
 	}
 }();
 
@@ -166,6 +185,7 @@ var mapControlModule = function() {
 		initLandmarkLayer();
 		initUsersLayer();
                 initClientsLayer();
+                initTrackingLayer();
 		userModule.init();
 		landmarkModule.init();
 	}
@@ -256,6 +276,20 @@ var mapControlModule = function() {
 
 		mapControlVariablesModule.setClientsLayer(vectorlayer);
 		mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
+
+	}
+        function initTrackingLayer() {
+
+        var source = new ol.source.Vector({
+                wrapX : false
+        });
+
+        var vectorlayer = new ol.layer.Vector({
+                source : source,
+        });
+
+        mapControlVariablesModule.setTrackingLayer(vectorlayer);
+        mapControlVariablesModule.getOlMap().addLayer(vectorlayer);
 
 	}
 	// ------------------End Layers Initializations------------------//
