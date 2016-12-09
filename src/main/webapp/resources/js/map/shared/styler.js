@@ -23,11 +23,11 @@ var stylerModule = function() {
 
 	this.default_image_options = {
 		anchor : [ 0, 0 ],
-		size : [ 40, 50 ],
+		size : [ 50, 60 ],
 		offset : [ 0, 0 ],
-		opacity : 2,
+		opacity :0.9,
 		//scale : 0.25,
-		src : '../../resources/img/images/default-client.png' 
+		src : 'resources/img/images/default-client.png' 
 	}
 
 	this.default_text_options = {

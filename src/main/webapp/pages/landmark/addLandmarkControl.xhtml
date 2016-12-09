@@ -6,10 +6,15 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:smartify="http://xmlns.jcp.org/jsf/composite/smartify">
 
-	<h3 class="control-sidebar-heading ">Add new landmarks</h3>
-	<h:form id="frm-add-new-landmark" class="add-user-box">
+	<div>
+		<h3 class="control-sidebar-heading add-user-box-title">Add new landmark</h3>
+		<i id="btn-add-new-client" class="btn btn-success fa fa-plus add-user-box-collapse-icon" onclick="landmarkModule.hideShowAddlandmarkForm()"/>
+		
+	</div>
+	<h:form id="frm-add-new-landmark" class="add-user-box collapse">
 		<div class="form-group">
 			<h:outputLabel for="txtNewLandmarkName" value="Landmark name" />
 			<h:inputText id="txtNewLandmarkName" placeholder="#{msg.newUserName}"
@@ -41,7 +46,7 @@
 			</h:commandButton>
 			<h:commandButton action="#{sidePanelLandmarkControl.save}"
 				class="btn btn-primary pull-right" value="save">
-				<f:ajax render="@form" execute="@form" />
+				<f:ajax render="@form frm-Landmark-list" execute="@form" />
 			</h:commandButton>
 		</div>
 
@@ -50,6 +55,73 @@
 		<h:inputHidden id="addLandmark-landmarkPositionY" value="#{sidePanelLandmarkControl.landmarkPositionY}" /> 
 			
 	
+	</h:form>
+       
+        
+        <!-- List Landmarks search box -->
+        <h:form id="frm-Landmark-list">
+            <div> 
+		<h3 class="control-sidebar-heading user-search-title border-top">LandMarks
+                    <div class="float-right"><input type="checkbox" checked="true" onclick="landmarkModule.toggle('Landmarks')"> View on map</input></div>
+		</h3>
+                
+                </div>
+		<!-- user search box -->
+		<div class="sidebar">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control"
+					placeholder="Find ..." id="myFilter"> </input> <span
+					class="input-group-btn">
+					<button type="submit" name="search" id="searchLandmark-btn"
+						class="btn btn-flat btn-success ">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="landMark-list">
+			<ul class="control-sidebar-menu no-margin" data-role="listview"
+				data-filter="true" data-input="#myFilter" data-autodividers="true"
+				data-inset="true">
+                            <ui:repeat var="landMark" value="#{mapControl.landmarks}">
+					<c:set var="v_onClick"
+						value="#{landMark.x} ne null? mapControlModule.zoomToLocation(#{landMark.x},#{landMark.y}): ''"></c:set>
+					<li>
+						<div class="widget widget-shadow padding-2">
+							<div class="widget-content text-center bg-white userbox">
+
+								<div class="col-md-12">
+									<div class="col-md-4 padding-left-0">
+										 <img
+											class="float-left userImg"
+											src="#{landMark.img!= null ? mapControl.defaultServerPath.concat(landMark.img ): mapControl.imgDefault}" />
+										
+									</div>
+									<div class="col-md-6">
+										<div>
+											<span class="color-white header"> #{landMark.name} </span>
+										</div>
+										
+
+
+									</div>
+									<div class="col-md-2">
+										<h:panelGroup rendered="#{landMark.x ne null}" class="float-left">
+											<a href="#"> <i class="fa fa-2x fa-eye"
+												onclick="mapControlModule.zoomToLocation(#{landMark.x},#{landMark.y})"></i>
+											</a>
+                                                                              
+										</h:panelGroup>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</li>
+				</ui:repeat>
+			</ul>
+		</div>
 	</h:form>
 	<!-- /.control-sidebar-menu -->
 

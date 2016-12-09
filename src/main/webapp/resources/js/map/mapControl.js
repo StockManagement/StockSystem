@@ -319,16 +319,17 @@ var mapControlModule = function() {
 	 * @param style
 	 * @param layer
 	 */
-	function addPointToLayer(layer, x, y, style){
+	function addPointToLayer(layer, x, y, style,name){
 		// -10
 		// -25
+                
 		if(layer == 'undefined') return;
 		var source = layer.getSource();
 		var thing = new ol.geom.Point( 
 			    ol.proj.transform([x,y], EPSG_4326, EPSG_3857)
 			);  
 			var featurething = new ol.Feature({
-			    name: "Thing",
+			    name: name||"Thing",
 			    featureCoordinates: {x: x, y: y},
 			    geometry: thing,
 			});

@@ -2,64 +2,68 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/template/master-Tracking.xhtml">
-	<!-- header page title -->
-	<ui:define name="title">#{msg.stock}</ui:define>
-	<ui:define name="css">
-	<h:outputStylesheet library="css/map" name="ol3gm.css" />
-	<h:outputStylesheet library="css/map" name="ol.css" />
-	<h:outputStylesheet library="css/map" name="mapControl.css" />
-	<h:outputStylesheet library="css/map/featureanimation" name="featureanimation.css" />
-	
-	</ui:define>
+    <ui:composition template="/template/master-Tracking.xhtml">
+        <!-- header page title -->
+        <ui:define name="title">#{msg.stock}</ui:define>
+        <ui:define name="css">
+            <h:outputStylesheet library="css/map" name="ol3gm.css" />
+            <h:outputStylesheet library="css/map" name="ol.css" />
+            <h:outputStylesheet library="css/map" name="mapControl.css" />
+            <h:outputStylesheet library="css/map/featureanimation" name="featureanimation.css" />
 
-	<!-- page body -->
-	<ui:define name="content">
-		
-		<!-- body page title -->
+        </ui:define>
 
-		<section class="content">
-		
-		<div id="map" class="map"></div>
-	
-		<script	src="https://maps.googleapis.com/maps/api/js?v=3.24&amp;libraries=places&amp;key=AIzaSyByC1gSTza4PlsxCEL-z3Kht4U4yFEZO6o"></script>
-		<h:outputScript library="primefaces" name="jquery/jquery.js" /> 
-		<h:outputScript library="js/map" name="ol3gm.js" />		
-		<h:outputScript library="js/map/shared" name="styler.js" />
-		<h:outputScript library="js/map/user" name="user.js" />		
-		<h:outputScript library="js/map/landmark" name="landmark.js" />		
-		<h:outputScript library="js/map/shared" name="unitTest.js" />
-		<h:outputScript library="js/map" name="mapControlEvent.js" />	
-		<h:outputScript library="js/map" name="mapControl.js" />
-		<h:outputScript library="js/map" name="editFeatureStyle.js" />
-		<h:outputScript library="js/shared" name="shared.js" />
-		<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		
-		
-		<!-- map animation -->
-		<h:outputScript library="js/map/featureanimation" name="fadeanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="featureanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="nullanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="pathanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="shakeanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="showanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="slideanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="teleportanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="throwanimation.js" />
-		<h:outputScript library="js/map/featureanimation" name="zoomanimation.js" />
-			
-		
-		<!-- hidden inputs -->
-		<h:inputHidden id="usersHidden"  value="#{mapControl.usersJsonStr}"/>
-		 <h:inputHidden id="clientsHidden"  value="#{mapControl.clientsJsonStr}"/>
-		 <ui:include src="editFeatureStyle.xhtml"></ui:include>
-		 	
-	</section>
-	</ui:define>
-</ui:composition>
+        <!-- page body -->
+        <ui:define name="content">
+
+            <!-- body page title -->
+
+            <section class="content">
+
+                <div id="map" class="map"></div>
+               <div id="popup" class="ol-popup">
+				<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+				<div id="popup-content"></div>
+			</div>
+                <script	src="https://maps.googleapis.com/maps/api/js?v=3.24&amp;libraries=places&amp;key=AIzaSyByC1gSTza4PlsxCEL-z3Kht4U4yFEZO6o"></script>
+                <h:outputScript library="primefaces" name="jquery/jquery.js" /> 
+                <h:outputScript library="js/map" name="ol3gm.js" />		
+                <h:outputScript library="js/map/shared" name="styler.js" />
+                <h:outputScript library="js/map/user" name="user.js" />		
+                <h:outputScript library="js/map/landmark" name="landmark.js" />		
+                <h:outputScript library="js/map/shared" name="unitTest.js" />
+                <h:outputScript library="js/map" name="mapControlEvent.js" />	
+                <h:outputScript library="js/map" name="mapControl.js" />
+                <h:outputScript library="js/map" name="editFeatureStyle.js" />
+                <h:outputScript library="js/shared" name="shared.js" />
+                <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+                <!-- map animation -->
+                <h:outputScript library="js/map/featureanimation" name="fadeanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="featureanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="nullanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="pathanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="shakeanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="showanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="slideanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="teleportanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="throwanimation.js" />
+                <h:outputScript library="js/map/featureanimation" name="zoomanimation.js" />
+
+
+                <!-- hidden inputs -->
+                <h:inputHidden id="usersHidden"  value="#{mapControl.usersJsonStr}"/>
+                <h:inputHidden id="clientsHidden"  value="#{mapControl.clientsJsonStr}"/>
+                <h:inputHidden id="landmarksHidden"  value="#{mapControl.landmarksJsonStr}"/>
+                <ui:include src="editFeatureStyle.xhtml"></ui:include>
+
+            </section>
+        </ui:define>
+    </ui:composition>
 </html>

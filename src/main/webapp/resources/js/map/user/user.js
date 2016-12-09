@@ -80,7 +80,7 @@ var userModule = function () {
         }
 
 
-        mapControlModule.addPointToLayer(layer, user.x, user.y, user.style);
+        mapControlModule.addPointToLayer(layer, user.x, user.y, user.style,user.userName);
     };
 
     /***
